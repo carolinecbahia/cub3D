@@ -1,0 +1,77 @@
+# ============================================================================
+# 42 School & C Projects .gitignore Template
+# ============================================================================
+
+# Binaries and executables
+# ----------------------------------------------------------------------------
+# Replace 'project_name' with your specific executable names
+project_name
+philo
+philo_bonus
+minitalk
+client
+server
+push_swap
+so_long
+
+# Common default executable names
+a.out
+*.out
+
+# Compiled libraries and object files
+# ----------------------------------------------------------------------------
+*.o
+*.a
+*.so
+
+# Directories
+# ----------------------------------------------------------------------------
+obj/
+bin/
+build/
+
+# Debugging files
+# ----------------------------------------------------------------------------
+*.dSYM/
+*.log
+valgrind-out.txt
+gmon.out
+*.trace
+
+# Editor & OS specific files
+# ----------------------------------------------------------------------------
+# VSCode
+.vscode/
+*.code-workspace
+
+# JetBrains (CLion)
+.idea/
+
+# Vim
+*.swp
+*~
+*.swo
+
+# macOS
+.DS_Store
+._*
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Test outputs and temporary files
+# ----------------------------------------------------------------------------
+*.test
+*.diff
+*.result
+*.tmp
+*.temp
+
+# Personal notes (optional)
+# ----------------------------------------------------------------------------
+# my_notes.md
+# personal_stuff.txt
