@@ -1,21 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/21 12:10:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/01/21 13:32:14 by ccavalca         ###   ########.fr       */
+/*   Created: 2026/01/21 13:51:57 by ccavalca          #+#    #+#             */
+/*   Updated: 2026/01/21 14:02:14 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int main(int argc, char **argv)
+int validate_map_chars(t_map map)
 {
-    (void)argv;
-    if (argc != 2)
-        return_error("Invalid arguments", 0);
-    return (0);
+    
+}
+
+int validate_walls(t_map map)
+{
+
 }

@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/21 12:10:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/01/21 13:32:14 by ccavalca         ###   ########.fr       */
+/*   Created: 2026/01/21 13:23:32 by ccavalca          #+#    #+#             */
+/*   Updated: 2026/01/21 13:24:38 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int main(int argc, char **argv)
+int return_error(char *msg, int err)
 {
-    (void)argv;
-    if (argc != 2)
-        return_error("Invalid arguments", 0);
-    return (0);
+    printf("Error: %s.\n", msg);
+    return (err);
 }

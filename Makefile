@@ -28,14 +28,18 @@ LIBFT_DIR	=	libft/
 # FILES
 # ============================================================================
 
-SRC_FILES	=	main.c \
-				utils.c \
-				processing.c
+SRC_FILES	=	main.c\
+				parsing/color_utils.c\
+				parsing/map_parsing.c\
+				parsing/map_validation.c\
+				parsing/path_validation.c\
+				parsing/textures_parsing.c\
+				utils/cleanup.c\
 
 OBJ_FILES	=	$(SRC_FILES:.c=.o)
 OBJS		=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
-TARGET		=	Cub3D
+TARGET		=	cub3D
 
 # ============================================================================
 # LIBRARY
@@ -57,7 +61,7 @@ $(TARGET): $(OBJS) $(LIBFT)
 	@echo "✓ $(TARGET) compiled successfully"
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "✓ Compiling $<"
 
