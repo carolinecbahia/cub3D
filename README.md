@@ -6,7 +6,7 @@
 [![Language](https://img.shields.io/badge/language-C-blue.svg)]()
 [![Graphics](https://img.shields.io/badge/graphics-MLX42-purple.svg)]()
 [![Project](https://img.shields.io/badge/project-Cub3D-orange.svg)]()
-[![Status](https://img.shields.io/badge/status-fully%20functional-success.svg)]()
+<!-- [![Status](https://img.shields.io/badge/status-fully%20functional-success.svg)]() -->
 
 ## 📋 Table of Contents
 
@@ -242,9 +242,9 @@ Academic project 42. Free for educational use.
 
 ## ✍️ Author
 
-**[Your Name]**
-- 42SP: [your-login]
-- GitHub: [@your-username]
+**Caroline Bahia**
+- 42SP: *ccavalca*
+- GitHub: *carolinecbahia*
 
 ---
 
