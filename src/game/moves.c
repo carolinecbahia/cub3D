@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 22:10:28 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/01/21 22:11:59 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/01/24 01:21:28 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,43 +14,34 @@
 
 int	move_player(t_game *game, t_vectors *pos, int new_x, int new_y)
 {
-	char	dest;
+	char dest;
 
 	dest = game->matrix[new_y][new_x];
 	if (dest == WALL)
 		return (0);
-	if (dest == COLLECTIBLE)
-		game->collected++;
-	if (dest == EXIT)
-	{
-		if (game->collected == game->collectible_count)
-			check_win(game);
-		return (0);
-	}
 	game->matrix[pos->y][pos->x] = EMPTY;
 	game->matrix[new_y][new_x] = PLAYER;
 	pos->x = new_x;
 	pos->y = new_y;
-	game->moves++;
-	ft_printf("Moves: %d\n", game->moves);
 	draw_map(game);
 	return (1);
 }
 
-int	handle_key(int keycode, t_game *game)
+void handle_key(mlx_key_data_t keydata, void *param)
 {
-	t_vectors	pos;
-
+	t_game *game = (t_game *)param;
+	t_vectors pos;
+	if (!game)
+		return;
 	find_player_pos(game, &pos);
-	if (keycode == KEY_ESC)
+	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
 		handle_close(game);
-	if (keycode == KEY_W || keycode == KEY_UP)
+	if ((keydata.key == MLX_KEY_W || keydata.key == MLX_KEY_UP) && keydata.action == MLX_PRESS)
 		move_up(game);
-	if (keycode == KEY_A || keycode == KEY_LF)
+	if ((keydata.key == MLX_KEY_A || keydata.key == MLX_KEY_LEFT) && keydata.action == MLX_PRESS)
 		move_left(game);
-	if (keycode == KEY_S || keycode == KEY_DW)
+	if ((keydata.key == MLX_KEY_S || keydata.key == MLX_KEY_DOWN) && keydata.action == MLX_PRESS)
 		move_down(game);
-	if (keycode == KEY_D || keycode == KEY_RG)
+	if ((keydata.key == MLX_KEY_D || keydata.key == MLX_KEY_RIGHT) && keydata.action == MLX_PRESS)
 		move_right(game);
-	return (0);
 }

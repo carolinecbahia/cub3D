@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 22:10:03 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/01/21 22:10:07 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/01/24 01:18:03 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	move_right(t_game *game)
 
 int	handle_close(t_game *game)
 {
+	ft_printf("[DEBUG] handle_close chamado: fechando janela e liberando recursos...\n");
 	mlx_destroy_window(game->mlx_ptr, game->win_ptr);
 	ft_free_matrix(game->matrix);
 #ifdef BONUS

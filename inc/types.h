@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:00 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/01/21 13:28:13 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/01/24 00:41:35 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 /* ========================================================================
 ** STRUCTURES
 ** ======================================================================== */
+
+typedef struct s_vectors
+{
+	int x;
+	int y;
+}   t_vectors;
 
 typedef struct	s_map
 {
@@ -28,6 +34,7 @@ typedef struct	s_map
 	char	*ea_texture;
 	int		floor_color;
 	int		ceiling_color;
+	int		player_count;
 }	t_map;
 
 typedef struct s_player
@@ -53,12 +60,13 @@ typedef struct s_img
 
 typedef struct s_game
 {
-	void		*mlx;
-	void		*win;
+	void		*mlx_ptr;
+	void		*win_ptr;
 	t_map		map;
 	t_player	player;
 	t_img		textures[4];
 	t_img		screen;
+	char		**matrix;
 }   t_game;
 
 

@@ -6,15 +6,23 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:55:18 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/01/21 22:07:13 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/01/24 00:17:27 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include <fcntl.h>
+#include <unistd.h>
 
-int check_file_extension(t_map map)
+int check_file_extension(char *filename)
 {
-    
+    int len = strlen(filename);
+    if (len < 4 || strcmp(filename + len - 4, ".cub") != 0)
+    {
+        ft_err("wrong extension!");
+        return (0);
+    }
+    return (1);
 }
 
 char	*map_reader(int fd)
@@ -71,10 +79,13 @@ char	*open_and_read_map(char *file)
 
 int validate_file(t_map map)
 {
-    
+	(void)map;
+	return (0);
 }
 
 t_map parse_map(t_map map)
 {
-    
+	(void)map;
+	t_map dummy = {0};
+	return dummy;
 }

@@ -1,32 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   textures_parsing.c                                 :+:      :+:    :+:   */
+/*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/21 13:53:48 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/01/24 00:42:54 by ccavalca         ###   ########.fr       */
+/*   Created: 2026/01/23 23:48:32 by ccavalca          #+#    #+#             */
+/*   Updated: 2026/01/23 23:50:10 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int validate_texture_path(t_img img)
+void ft_err(char *msg)
 {
-	(void)img;
-	return (0);
+	printf("Error: %s!\n", msg);
 }
-
-int parse_textures(t_img img)
-{
-	(void)img;
-	return (0);
-}
-
-int parse_colors(t_img img)
-{
-	(void)img;
-	return (0);
-}
-
