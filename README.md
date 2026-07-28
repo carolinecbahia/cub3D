@@ -242,8 +242,8 @@ Academic project 42. Free for educational use.
 
 ## ✍️ Author
 
-**Caroline Bahia**
-- 42SP: *ccavalca*
+**Caroline Bahia e Ana Clara Nunes**
+- 42SP: *anunes-o; ccavalca*
 - GitHub: *carolinecbahia*
 
 ---
