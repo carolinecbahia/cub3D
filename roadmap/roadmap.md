@@ -133,14 +133,14 @@ cub3D/
 
 ## Git
 
-- [ ] Atualizar a branch `develop`
-- [ ] Criar as branches de desenvolvimento
+- [x] Atualizar a branch `features`
+- [x] Criar as branches de desenvolvimento
 - [ ] Definir a estratégia de merge
 - [ ] Definir convenções de código
 
 ### Entrega da Sprint
 
-- Projeto compilando com sucesso.
+- [x] Projeto compilando com sucesso.
 
 ---
 
