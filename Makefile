@@ -39,6 +39,7 @@ CFLAGS		+= -I$(INC_DIR)
 CFLAGS		+= -I$(LIBFT_DIR)/inc
 CFLAGS		+= -I$(LIBFT_DIR)/ft_printf/inc
 CFLAGS		+= -I$(MLX42_DIR)/include
+CFLAGS		+= -lm
 
 DEBUG_FLAGS	= -g3 -DDEBUG
 OPT_FLAGS	= -O2 -funroll-loops
