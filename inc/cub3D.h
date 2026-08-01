@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/01 14:24:03 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/01 15:46:18 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@
 
 # define TILE_SIZE 32
 
-# define WIDTH 1024
-# define HEIGHT 512
+# define WIDTH 1280
+# define HEIGHT 720
 
 // Map characters
 # define EMPTY '0'
@@ -90,6 +90,15 @@ void	render_background(t_game *game);
 
 /* Hooks*/
 void	close_key_hook(mlx_key_data_t key, void *param);
+void	close_window_hook(void *param);
+void	update_game(void *param);
+void	move_forward(t_game *game);
+void	move_backward(t_game *game);
+void	move_left(t_game *game);
+void	move_right(t_game *game);
+void	rotate_right(t_game *game);
+void	rotate_left(t_game *game);
+int	check_collision(t_game *game, double x, double y);
 
 /* Utility functions */
 char	**create_grid(t_map *map);
