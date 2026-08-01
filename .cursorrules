@@ -1,0 +1,649 @@
+# 🎯 42 Cursus - Coding Guidelines for AI Assistant
+
+## 📌 Workspace Overview
+- **School:** 42 São Paulo
+- **Focus:** C programming, C++, system programming, and graphics
+- **Projects:** libft, GNL, Printf, Minitalk, Push_swap, So_long, Cub3d, Minishell, Philosophers
+
+---
+
+## 🔧 Norma 42 v4.1 - Strict Compliance (C PROJECTS ONLY: 00, 01, 02, 03)
+
+**⚠️ Applies to:** All C projects (libft, GNL, Printf, Minitalk, Push_swap, Minishell, Philosophers)
+**❌ Does NOT apply to:** C++ projects (04/), Graphics projects, or non-C code
+
+### 1. **Palavras-chave e Estruturas PROIBIDAS**
+❌ **Absolutamente Proibido:**
+- `for` loops
+- `do...while` loops
+- `switch`, `case`, `goto`
+- Operadores ternários: `?` `:`
+
+✅ **Use instead:** `while` loops, `if/else`
+
+### 2. **Restrições em Funções (RIGOROSO)**
+- **Máximo 25 linhas** (sem contar as chaves `{}`)
+- **Máximo 5 variáveis declaradas** por função
+- **Máximo 4 parâmetros** por função
+- **SEM comentários** dentro do corpo da função
+- **Declaração E Inicialização em linhas separadas** (exceto globais/static/const)
+- **Sem linhas vazias** dentro da função (exceto 1 após declarações de variáveis)
+
+### 3. **Formatação (OBRIGATÓRIO)**
+- **80 colunas** máximo por linha
+- **Indentação:** Tabs reais (ASCII 9) = 4 caracteres (NÃO espaços)
+- **Nenhuma linha vazia** consecutiva (max 1)
+- **Sem espaços** no final de linhas
+- **Sem dois ou mais espaços** consecutivos
+- **Apenas ASCII padrão** (exceto strings literais)
+- **Naming:** `snake_case` APENAS (letras MINÚSCULAS)
+
+### 4. **Organização de Arquivos**
+- **Máximo 5 funções** por arquivo `.c`
+- **Sem structs declaradas em `.c`** (apenas em `.h`)
+- **Sem includes de `.c` em outro `.c` ou `.h`**
+- **Sem headers não utilizados**
+- **Sem variáveis globais** (exceto `static` ou `const`)
+
+### 5. **Pré-processadores (RESTRITO)**
+- **Sem macros de múltiplas linhas**
+- `#define` **apenas para constantes e valores literais**
+- **Sem pré-processador fora do escopo global**
+- **Sem ofuscação de código** com macros
+
+### 6. **Makefile (OBRIGATÓRIO)**
+- **SEM relink** - não recompila se não há mudanças
+- **SEM wildcards** (`*.c`, `*.o`) - listar todos os arquivos explicitamente
+- **Rules:** `all`, `clean`, `fclean`, `re`, `bonus` (if applicable)
+
+### 2. **Project Structure** (Standard 42 Template)
+```
+project/
+├── Makefile          # Build rules, re-linkable
+├── README.md         # Project documentation
+├── inc/              # Header files (.h)
+├── src/              # Source files (.c)
+├── libft/            # Reusable library (if used)
+├── obj/              # Object files (gitignored)
+└── .gitignore        # Exclude build artifacts
+```
+
+### 3. **Makefile Standards**
+- **Rules:** `all`, `clean`, `fclean`, `re`, `bonus` (if applicable)
+- **Flags:** `-Wall -Wextra -Werror -I<headers>`
+- **No linking order issues** - use proper variable ordering
+- **Re-linkable:** Remove `.o` only on `clean`, not on `fclean`
+
+### 4. **Memory Management**
+- **No leaks:** Use `valgrind --leak-check=full` before submitting
+- **Free strategy:** Create `free_*` functions for cleanup
+- **Exit handling:** Properly close/free on `exit()` and error paths
+- **Forbidden functions only if project requires it** (some projects ban `malloc`)
+
+### 5. **Error Handling**
+- **Check return values** of all system calls (`malloc`, `open`, `read`, etc)
+- **Use `perror()`** or custom error printing
+- **Exit codes:** Use `EXIT_SUCCESS` (0) and `EXIT_FAILURE` (1) from stdlib
+- **stderr vs stdout:** Errors to stderr, output to stdout
+
+### 6. **Code Organization**
+- **One responsibility per function** (SRP)
+- **Logical file grouping** (parsing, execution, utils, etc)
+- **Clear file naming:** `parser.c`, `executor.c`, `validation.c` (NOT `utils.c` for everything)
+- **Constants in headers** as `#define` or `enum`
+
+### 7. **Bonus Features**
+- **Only if mandatory is perfect** - No partial bonus
+- **Separate files:** `*_bonus.c`, `*_bonus.h` (when required)
+- **Document bonus status** in README
+- **All bonus must pass norminette**
+
+---
+
+---
+
+## 🚫 CHECKLIST - Erros que FALHAM na Norminette v4.1
+
+❌ **ERROS CRÍTICOS (Falha Automática):**
+- [ ] Função com >25 linhas
+- [ ] Função com >5 variáveis locais
+- [ ] Função com >4 parâmetros
+- [ ] Uso de `for`, `do...while`, `switch/case`, `goto`, `?:`
+- [ ] Comentários dentro da função
+- [ ] Linha com >80 caracteres
+- [ ] Indentação com espaços (não tabs)
+- [ ] Variável global não `static` ou `const`
+- [ ] Struct declarada em `.c`
+- [ ] Arquivo `.c` incluído em outro arquivo
+- [ ] >5 funções no mesmo arquivo
+- [ ] Macros com múltiplas linhas
+- [ ] Wildcards no Makefile (`*.c`, `*.o`)
+- [ ] Headers não utilizados
+- [ ] Letras MAIÚSCULAS em nomes de função/variável/arquivo
+
+---
+
+## ✅ EXEMPLO CORRETO (Norma 4.1)
+
+### ✅ Função Válida:
+```c
+// CORRETO: Segue todas as restrições
+static int	process_token(t_token *tok, t_list **head, char *value)
+{
+	char	*expanded;
+	char	*temp;
+
+	expanded = ft_strdup(value);
+	if (!expanded)
+		return (-1);
+	temp = expanded;
+	expanded = expand_variables(expanded, tok->env);
+	free(temp);
+	return (0);
+}
+```
+- ✅ 13 linhas (< 25)
+- ✅ 3 variáveis locais (< 5)
+- ✅ 3 parâmetros (< 4)
+- ✅ Sem comentários no corpo
+- ✅ Tabs para indentação
+- ✅ Sem linhas vazias consecutivas
+
+### ❌ Função Inválida:
+```c
+// ERRADO: Viola múltiplas restrições
+static void	process_all(t_data *data)
+{
+	for (int i = 0; i < data->count; i++)  // ❌ for loop
+	{
+		int result = (data->items[i] > 0 ? 1 : 0);  // ❌ ternário
+		char *temp = data->values[i]; // ❌ inicializa na mesma linha
+
+		// ❌ comentário no corpo
+		process_item(temp);
+	}
+}
+```
+
+---
+
+## 🔍 Code Quality Checks (BEFORE Implementation)
+
+**Always do these before suggesting code:**
+
+1. ✅ **Norminette check** - `norminette inc src` (if available)
+2. ✅ **Compile warnings** - `-Wall -Wextra -Werror`
+3. ✅ **Norma 4.1 compliance** - Check against strict rules above
+4. ✅ **Memory leaks** - `valgrind --leak-check=full ./program`
+5. ✅ **Edge cases** - Empty input, NULL pointers, boundary conditions
+6. ✅ **Exact line count** - Function must be exactly ≤25 lines
+7. ✅ **Variable count** - Exactly ≤5 local variables
+
+---
+
+## 📂 Project-Specific Rules
+
+### C Projects (00, 01, 02, 03)
+- **Naming:** `ft_functionname` for libft functions
+- **Headers:** Include guards with `#ifndef FT_*.H`
+- **Bonus:** Create separate `*_bonus.c` files
+- **Testing:** Create test files in separate directory if not prohibited
+- **⚠️ MANDATORY:** Follow Norma 42 v4.1 (see strict rules above)
+
+### C++ Projects (04) - NO NORMA 42 v4.1 REQUIRED
+- **Naming:** `CapitalCamelCase` for classes, `snake_case` for methods
+- **Headers:** Use `.hpp` extension
+- **Const correctness:** Mark immutable methods as `const`
+- **Orthodox Canonical Form:** Implement all 4 required methods
+- **No STL restrictions:** Use C++ standard library
+- **✅ Flexible formatting** - No 80-col limit, functions can be >25 lines
+
+### 42 School C++ Modules (CPP00-CPP04)
+
+**Compiler & Standards:**
+- **Mandatory:** C++98 standard (`-std=c++98`)
+- **Compiler:** `c++` command (g++ or clang++)
+- **Flags:** `-Wall -Wextra -Werror -std=c++98`
+- **❌ Forbidden:** C++11 features (auto, nullptr, range-based for, etc.)
+
+**Module Structure:**
+Each module contains 3-4 exercises (ex00, ex01, ex02, ex03):
+```
+CPP0X/
+├── Makefile              # Multi-exercise template
+├── README.md             # Professional module documentation
+├── ex00/
+│   ├── *.hpp             # Header files
+│   ├── *.cpp             # Implementation files
+│   └── main.cpp          # Entry point
+├── ex01/
+│   └── [similar structure]
+├── ex02/
+│   └── [similar structure]
+└── ex03/
+    └── [similar structure]
+```
+
+**Key Requirements by Module:**
+
+**CPP00 - Introduction to OOP**
+- ✅ Basic classes, constructors, destructors
+- ✅ Member functions (methods)
+- ✅ Encapsulation (public, private, protected)
+- ✅ Use of std::string, std::cout, std::cin
+
+**CPP01 - Memory, Pointers & References**
+- ✅ Pointers and references fundamentals
+- ✅ new/delete operators (no malloc/free)
+- ✅ File I/O (std::fstream)
+- ✅ String manipulation
+
+**CPP02 - Operator Overloading & Orthodox Canonical Form**
+- ✅ **Mandatory:** Orthodox Canonical Form (4 methods):
+  - Default constructor
+  - Copy constructor
+  - Copy assignment operator
+  - Destructor
+- ✅ Operator overloading (arithmetic, comparison, stream operators)
+- ✅ Fixed-point number implementation (const fields, subject requirements)
+- ✅ Static methods and members
+
+**CPP03 - Inheritance**
+- ✅ Single inheritance with virtual inheritance for multiple inheritance
+- ✅ Constructor chaining (member initializer lists)
+- ✅ Diamond Problem solution
+- ✅ Protected and private inheritance
+- ✅ Virtual destructors
+
+**CPP04 - Polymorphism & Design Patterns**
+- ✅ Virtual functions and pure virtual functions (abstract classes)
+- ✅ Interfaces (pure virtual methods)
+- ✅ Factory Pattern implementation
+- ✅ Dynamic casting (when appropriate)
+- ✅ Polymorphic behavior with inheritance hierarchies
+
+**Orthodox Canonical Form Enforcement:**
+All classes must implement OCF (especially from CPP02 onward):
+```cpp
+class MyClass
+{
+private:
+    int	value;
+
+public:
+    MyClass();                          // Default constructor
+    MyClass(const MyClass &other);      // Copy constructor
+    MyClass &operator=(const MyClass &other);  // Copy assignment
+    ~MyClass();                         // Destructor
+    
+    // Other methods...
+};
+```
+
+**Compilation & Makefile:**
+- Use `Makefile.cpp.multi` template for module structure
+- Each exercise compiles to separate executable
+- Object files in `obj/` directory
+- All targets: `all`, `ex00`, `ex01`, `ex02`, `ex03`, `clean`, `fclean`, `re`
+- Optional: `debug`, `release`, `valgrind` targets
+
+**Code Style (C++98):**
+- ✅ Method declarations in headers (`.hpp`)
+- ✅ Method definitions in implementation files (`.cpp`)
+- ✅ Use of initialization lists for constructors
+- ✅ Proper use of `const` for methods and parameters
+- ✅ Avoid C++11 auto, nullptr, uniform initialization
+- ✅ Traditional for loops instead of range-based
+- ✅ Use std:: namespace or `using std::type;` declarations
+
+**Testing & Validation:**
+- ✅ Compile with all warning flags: `c++ -Wall -Wextra -Werror -std=c++98`
+- ✅ Test each exercise independently
+- ✅ Verify Orthodox Canonical Form with copy/assignment
+- ✅ Check for memory leaks: `valgrind --leak-check=full ./ex00`
+- ✅ Ensure no undefined behavior
+
+**Common Pitfalls to Avoid:**
+- ❌ Using C++11 features (auto, nullptr, lambdas, etc.)
+- ❌ Forgetting copy constructor/assignment operator
+- ❌ Not implementing virtual destructors in inheritance
+- ❌ Memory leaks from new/delete
+- ❌ Forgetting const on const methods
+- ❌ Deep copy issues in copy constructor
+- ❌ Self-assignment check missing in copy assignment
+
+
+
+### Graphics Projects (so_long, others)
+- **Minilibx:** Use provided library, no external graphics libs
+- **Memory:** Free all resources including textures, windows
+- **Window handling:** Handle window close events properly
+
+### Concurrency Projects (philosophers, etc)
+- **Thread safety:** Use mutex/semaphore correctly
+- **Race conditions:** Check with tools like `helgrind` (valgrind)
+- **Deadlock prevention:** Document lock order
+- **Resource cleanup:** Ensure all threads join before exit
+
+---
+
+## 🎯 Implementation Guidelines
+
+### When Making Changes:
+
+1. **Read the code first** - Understand structure before modifying
+2. **Find exact location** - Line numbers, context matching
+3. **Include 3-5 lines of context** - Before and after changes
+4. **Test after changes** - Compile and run immediately
+5. **Track progress** - Use todo lists for multi-step tasks
+6. **Document in chat notes** - Keep `CHAT_NOTES_*.md` updated
+
+### When Creating Files:
+
+- **Only create essential files** - Don't over-engineer
+- **Follow project template** - Consistency matters
+- **Add to Makefile** - If new source files are added
+- **Update headers** - Include newly created header files
+
+### When Fixing Bugs:
+
+1. **Reproduce the bug** - Verify it exists
+2. **Understand root cause** - Don't patch symptoms
+3. **Check for side effects** - Ensure fix doesn't break other features
+4. **Add edge case handling** - Prevent regression
+5. **Test thoroughly** - Normal + edge cases
+
+---
+
+## 🚫 Things to AVOID
+
+- ❌ **Global variables** (unless absolutely necessary)
+- ❌ **Magic numbers** - Use named constants
+- ❌ **Deeply nested code** - Refactor into functions
+- ❌ **Commented-out code** - Delete or explain with `// TODO:`
+- ❌ **Unclear variable names** - Use descriptive names
+- ❌ **Large functions** - Break into smaller functions
+- ❌ **Memory leaks** - Test with valgrind
+- ❌ **Mixed concerns** - Separate parsing/execution/display logic
+- ❌ **Duplicate code** - Extract to reusable functions
+
+---
+
+## ✅ Things to DO
+
+- ✅ **Write modular code** - Reusable functions
+- ✅ **Check all return values** - malloc, open, read, etc
+- ✅ **Handle errors gracefully** - Don't crash silently
+- ✅ **Use const correctly** - For pointers, parameters
+- ✅ **Test edge cases** - Empty input, large input, invalid input
+- ✅ **Document complex logic** - Comments for "why", not "what"
+- ✅ **Keep files organized** - Related functions in same file
+- ✅ **Follow project naming** - Consistency across team
+- ✅ **Update README** - Keep project docs current
+
+---
+
+## 📊 File Organization Example
+
+### Minishell Structure (Apply to all projects)
+```
+03/minishell/
+├── Makefile
+├── README.md
+├── includes/
+│   ├── minishell.h
+│   └── structs.h
+├── src/
+│   ├── main.c              # Entry point
+│   ├── lexer/
+│   │   ├── lexer.c
+│   │   └── tokenize.c
+│   ├── parser/
+│   │   ├── parser.c
+│   │   ├── syntax_check.c
+│   │   └── validate.c
+│   ├── executor/
+│   │   ├── executor.c
+│   │   ├── pipes.c
+│   │   ├── redirections.c
+│   │   └── builtins.c
+│   └── utils/
+│       ├── error.c
+│       ├── memory.c
+│       └── helpers.c
+└── libft/
+    ├── Makefile
+    └── src/
+```
+
+---
+
+## 🔗 Documentation References
+
+- **Chat Notes:** `/home/carol/42cursus/templates/CHAT_NOTES_*.md`
+- **Test Reports:** `/home/carol/42cursus/templates/test_reports/`
+- **Templates:** `/home/carol/42cursus/templates/`
+- **Makefile Template:** `/home/carol/42cursus/templates/TEMPLATES_HEADER_MAKEFILE.md`
+
+<<<<<<< HEAD
+### 📂 Storage Rules for Analyses & Tests (Routing)
+- **Minishell Analyses:** `/home/carol/42cursus/templates/minishell analysis`
+- **Philosophers Analyses & Test Docs:** `/home/carol/42cursus/templates/philo analysis`
+- **Cub3D Analyses:** `/home/carol/42cursus/templates/cub3D analysis`
+- **Chat Notes:** `/home/carol/42cursus/templates/chat notes`
+- **Project Subjects:** `/home/carol/42cursus/templates/subjects` (consultar subject.md para requisitos oficiais do projeto)
+- **Naming Convention:** `<TÓPICO>_<INTERVALO_DATAS>.md` (ex.: `SUMMARY_CHANGES_22_12_to_08_01.md`)
+- **Rule:** Crie/mova relatórios de análise, diffs, timelines, resumos e guias diretamente para as pastas acima.
+---
+
+## 📝 Communication Style with AI
+
+- **Be specific:** "Fix the pipe bug in parser.c line 57" (not "Fix parser")
+- **Provide context:** Link related chat notes or test reports
+- **Ask for explanations:** If something seems unclear
+- **Use todos:** For complex multi-step tasks
+- **Request code review:** Before committing major changes
+
+---
+
+## 🎓 Learning Goals
+
+- Write clean, maintainable C code following 42 standards
+- Understand Unix system calls and processes
+- Practice memory management and debugging
+- Build larger projects with multiple modules
+- Prepare for school evaluations
+
+---
+
+**Last Updated:** 21/12/2025
+**Applies to:** All projects in 42cursus workspace
+**Versions:** C (00-03), C++ (04), All Graphics/Concurrency projects
+Escopo: Workspace /home/carol/42cursus
+Prioridade: Alta (arquivo de instruções padrão)
+Idioma preferido: Português (pt-BR)
+
+Regras gerais:
+- Responder SEMPRE em português brasileiro (pt-BR) em todas as interações, explicações, comentários e documentação gerada.
+- Não alterar código (arquivos fonte, headers, Makefiles, scripts) sem solicitação prévia e expressa do usuário. Em caso de dúvida, solicitar confirmação explícita antes de qualquer modificação.
+- Para qualquer alteração de código solicitada: apresentar um plano curto (o que, onde, impacto), aplicar mudanças com patch mínimo, e executar testes/compilação imediatos após a alteração.
+- Salvar e organizar todos os relatórios de análise, diffs, timelines e resumos em:
+	- templates/minishell analysis (projeto Minishell)
+	- templates/philo analysis (projeto Philosophers)
+- Não deixar arquivos de análise soltos na raiz do workspace; mover para uma das pastas acima.
+- Convenção de nomes para análises: <TÓPICO>_<INTERVALO_DATAS>.md (ex.: SUMMARY_CHANGES_22_12_to_08_01.md)
+- Ao gerar novos .md de análise, criar diretamente na pasta adequada ou mover para lá imediatamente.
+- Manter respostas concisas, diretas e objetivas; priorizar comandos e caminhos claros.
+- Evitar formatações pesadas; usar listas curtas quando necessário.
+
+Fluxos padrão:
+- Projeto Minishell:
+	- Relatórios de mudanças de git: gerar arquivos na pasta templates/minishell analysis
+	- Guias de comandos: GIT_COMMANDS_REFERENCE.md dentro da mesma pasta
+	- Índices e resumos executivos: INDEX_DOCUMENTATION_*.md e SUMMARY_CHANGES_*.md na mesma pasta
+- Projeto Philosophers:
+	- Análises e testes (relatórios, diffs, timelines, resumos): armazenar em templates/philo analysis
+	- Documentos de referência de testes (e.g., TEST_GUIDE, TEST_SUMMARY): manter cópias organizadas em templates/philo analysis quando gerados
+	- Guias e comandos específicos: criar GIT_COMMANDS_REFERENCE_PHILO.md na mesma pasta, quando necessário
+
+Boas práticas:
+- Referenciar arquivos do workspace com links relativos quando citado em respostas.
+- Preferir executar validações (build/test) quando possível.
+- Não criar documentação redundante; atualizar os arquivos existentes.
+- Sempre manter a separação por projeto (Minishell vs Philosophers) nas pastas de templates.
+- Sempre que adicionar ou alterar regras neste .cursorrules raiz, replicar a mesma alteração em /home/carol/42cursus/templates/.cursorrules.
+
+Este arquivo é a referência principal de instruções do assistente neste workspace. Caso seja necessário ajustar regras, editar este arquivo e manter histórico via git.
+
+Escopo: Workspace /home/carol/42cursus
+Prioridade: Alta (arquivo de instruções padrão)
+Idioma preferido: Português (pt-BR)
+
+Regras gerais:
+- Salvar e organizar todos os relatórios de análise, diffs, timelines e resumos em:
+	- templates/projects_analysis/minishell analysis (projeto Minishell)
+	- templates/projects_analysis/philo analysis (projeto Philosophers)
+	- templates/projects_analysis/cpp_analysis (projetos C++ CPP00-CPP04)
+- Não deixar arquivos de análise soltos na raiz do workspace; mover para uma das pastas acima.
+- Convenção de nomes para análises: <TÓPICO>_<INTERVALO_DATAS>.md (ex.: SUMMARY_CHANGES_22_12_to_08_01.md)
+- Ao gerar novos .md de análise, criar diretamente na pasta adequada ou mover para lá imediatamente.
+- Manter respostas concisas, diretas e objetivas; priorizar comandos e caminhos claros.
+- Evitar formatações pesadas; usar listas curtas quando necessário.
+
+Fluxos padrão:
+- Projeto Minishell:
+	- Relatórios de mudanças de git: gerar arquivos na pasta templates/projects_analysis/minishell analysis
+	- Guias de comandos: GIT_COMMANDS_REFERENCE.md dentro da mesma pasta
+	- Índices e resumos executivos: INDEX_DOCUMENTATION_*.md e SUMMARY_CHANGES_*.md na mesma pasta
+- Projeto Philosophers:
+	- Análises e testes (relatórios, diffs, timelines, resumos): armazenar em templates/projects_analysis/philo analysis
+	- Documentos de referência de testes (e.g., TEST_GUIDE, TEST_SUMMARY): manter cópias organizadas em templates/projects_analysis/philo analysis quando gerados
+	- Guias e comandos específicos: criar GIT_COMMANDS_REFERENCE_PHILO.md na mesma pasta, quando necessário
+- Projetos C++ (CPP00-CPP04):
+	- Análises de especificações: armazenar em templates/projects_analysis/cpp_analysis
+	- Relatórios de evolução de módulos: gerar arquivos com padrão EVOLUTION_CPPxx_*.md
+	- Documentos de referência OCF e padrões: ORTHODOX_CANONICAL_FORM_GUIDE.md na mesma pasta
+	- Guias de compilação e debugging: C++98_COMPILATION_GUIDE.md na mesma pasta
+	- Análises de exercícios: CPPxx_EXyy_ANALYSIS_*.md para cada exercício importante
+
+Boas práticas:
+- Referenciar arquivos do workspace com links relativos quando citado em respostas.
+- Preferir executar validações (build/test) quando possível.
+- Não criar documentação redundante; atualizar os arquivos existentes.
+- Sempre manter a separação por projeto (Minishell vs Philosophers) nas pastas de templates.
+
+---
+
+## 📝 Chat Notes - Regras de Documentação
+
+### Estrutura Padrão
+Todos os chat notes devem seguir o formato:
+```markdown
+# Chat Notes - DD/MM/YYYY
+
+## Contexto da Sessão
+- **Data:** DD de mês de YYYY
+- **Horário:** HH:MM - HH:MM (aproximadamente X horas)
+- **Projeto:** [Nome do Projeto]
+- **Atividade Principal:** [Descrição concisa]
+
+---
+
+## [Período 1] HH:MM - HH:MM (~X horas)
+
+### Issue/Feature: [Nome]
+**Problema/Objetivo:**
+[Descrição]
+
+**Solução:**
+[Implementação]
+
+**Arquivos Modificados:**
+- [caminho/arquivo.c]
+
+---
+
+## [Período 2] HH:MM - HH:MM (~X minutos)
+[...]
+```
+
+### Regras de Atualização
+
+## 📝 Análise Norminette - Cub3D
+
+Para gerar um relatório completo de norminette do projeto Cub3D, execute:
+
+```bash
+cd /home/carol/42cursus/04/cub3D
+bash ../templates/cub3D\ analysis/cub3d_norm.sh
+```
+
+O relatório será salvo automaticamente em `/home/carol/42cursus/templates/cub3D analysis/` com timestamp. O script verifica libft, inc, inc_bonus, src e src_bonus.
+
+> Sempre rode este script antes de submissão ou revisão para garantir conformidade com a norma 42.
+1. **Frequência:** Atualizar a cada **2 horas** de trabalho ou ao fim de cada issue/feature
+2. **Detalhamento por Período:**
+   - Dividir sessão em períodos de ~2h
+   - Cada período deve ter horário aproximado de início e fim
+   - Duração aproximada entre parênteses
+3. **Organização Modular:**
+   - Cada issue/feature em seção própria
+   - Facilita merge de atividades de diferentes sessões de chat
+   - Permite reorganização cronológica posterior
+
+### Conteúdo Obrigatório
+- ✅ Horários aproximados (início/fim da sessão total)
+- ✅ Divisão em períodos com duração
+- ✅ Arquivos modificados com links relativos
+- ✅ Problemas identificados e soluções implementadas
+- ✅ Comandos executados quando relevantes
+- ✅ Resultados de testes/validações
+
+### Localização
+- **Minishell:** `templates/chat notes/CHAT_NOTES_DD_MM_YYYY.md`
+- **Philosophers:** `templates/chat notes/CHAT_NOTES_DD_MM_YYYY.md`
+- **Outros projetos:** `templates/chat notes/CHAT_NOTES_DD_MM_YYYY.md`
+
+### Boas Práticas
+- Criar arquivo no **início** da sessão com contexto básico
+- Atualizar **a cada 2h** ou ao completar issue importante
+- Incluir **código relevante** (antes/depois) quando apropriado
+- Marcar tentativas **incorretas/revertidas** para aprendizado
+- Adicionar **insights e aprendizados** ao final
+- Usar emojis para status: ✅ (completo), ⚠️ (em progresso), ❌ (revertido)
+
+---
+
+## 🔄 Sincronização de .cursorrules
+
+### Arquivos a Manter Sincronizados
+- **Principal:** `/home/ccavalca/42cursus/.cursorrules` (raiz do workspace)
+- **Backup/Template:** `/home/ccavalca/42cursus/templates/.cursorrules`
+
+### Regra de Sincronização
+Sempre que modificar **qualquer um** dos arquivos `.cursorrules`:
+1. **Aplicar mudanças em ambos** os arquivos simultaneamente
+2. Usar `multi_replace_string_in_file` para editar ambos de uma vez
+3. Garantir que o conteúdo permanece idêntico
+
+### Comando Manual (se necessário)
+```bash
+# Sincronizar de raiz para templates
+cp /home/ccavalca/42cursus/.cursorrules /home/ccavalca/42cursus/templates/.cursorrules
+
+# Sincronizar de templates para raiz
+cp /home/ccavalca/42cursus/templates/.cursorrules /home/ccavalca/42cursus/.cursorrules
+```
+
+---
+
+## 🕒 Aditivo: Horário Oficial para Registros
+
+- **Todos os registros de horário em chat notes, logs, documentação de sessões e arquivos de análise devem ser feitos obrigatoriamente em horário de Brasília/São Paulo (GMT-3).**
+- Caso o sistema/terminal esteja em outro fuso, converter manualmente para GMT-3 antes de registrar.
+- O horário local do usuário (Brasília/São Paulo) é o padrão para toda a documentação do workspace.
+- **Ao iniciar um novo chat notes ou sessão, registrar automaticamente o horário atual do sistema (preferencialmente via comando `date "+%H:%M %d/%m/%Y"` no terminal) e ajustar para GMT-3 se necessário.**
+
+---
+
+Este arquivo é a referência principal de instruções do assistente neste workspace. Caso seja necessário ajustar regras, editar este arquivo e manter histórico via git.
