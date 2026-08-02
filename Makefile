@@ -14,10 +14,11 @@ CC			= gcc
 # DIRECTORIES
 # ============================================================================
 
-SRC_DIR		= src/
-INC_DIR		= inc/
-OBJ_DIR		= obj/
-DEP_DIR		= dep/
+SRC_DIR			= src/
+INC_DIR			= inc/
+BONUS_INC_DIR	= inc_bonus/
+OBJ_DIR			= obj/
+DEP_DIR			= dep/
 
 LIBFT_DIR	= libft/
 MLX42_DIR	= MLX42
@@ -27,7 +28,7 @@ MLX42_DIR	= MLX42
 # ============================================================================
 
 MAP			?= maps/valid/random_valid_1.cub
-ARGS		?=
+ARGS		?= 
 
 # ============================================================================
 # FLAGS
@@ -36,6 +37,7 @@ ARGS		?=
 CFLAGS		= -Wall -Wextra -Werror -std=c99 -pedantic
 CFLAGS		+= -MMD -MP
 CFLAGS		+= -I$(INC_DIR)
+CFLAGS		+= -I$(BONUS_INC_DIR)
 CFLAGS		+= -I$(LIBFT_DIR)/inc
 CFLAGS		+= -I$(LIBFT_DIR)/ft_printf/inc
 CFLAGS		+= -I$(MLX42_DIR)/include
@@ -118,22 +120,22 @@ MANDATORY_SRC = \
 	src/hooks/collision.c
 
 BONUS_SRC = \
-# src_bonus/main_bonus.c \
-# src_bonus/minimap_bonus.c \
-# src_bonus/mouse_bonus.c \
-# src_bonus/doors_bonus.c \
-# src_bonus/sprites_bonus.c
+	src_bonus/main_bonus.c \
+	src_bonus/hooks/mouse_hook.c
 
 # ============================================================================
 # OBJECTS
 # ============================================================================
 
+MANDATORY_SRC_NO_MAIN = $(filter-out src/main.c, $(MANDATORY_SRC))
 CORE_OBJS		= $(CORE_SRC:.c=.o)
 MANDATORY_OBJS	= $(MANDATORY_SRC:.c=.o)
 BONUS_OBJS		= $(BONUS_SRC:.c=.o)
+MAND_OBJS_NO_MAIN	= $(MANDATORY_SRC_NO_MAIN:.c=.o)
 
 OBJS		= $(addprefix $(OBJ_DIR), $(CORE_OBJS) $(MANDATORY_OBJS))
-OBJS_BONUS	= $(addprefix $(OBJ_DIR), $(CORE_OBJS) $(BONUS_OBJS))
+
+OBJS_BONUS	= $(addprefix $(OBJ_DIR), $(CORE_OBJS) $(MAND_OBJS_NO_MAIN) $(BONUS_OBJS))
 
 DEPS		= $(OBJS:.o=.d)
 DEPS_BONUS	= $(OBJS_BONUS:.o=.d)
