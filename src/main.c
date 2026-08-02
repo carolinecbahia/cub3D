@@ -6,23 +6,71 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:10:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/18 00:13:11 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/01 15:47:23 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int main(int argc, char **argv)
+static void	free_fake_game(t_game *game)
 {
-	t_map	map;
+	if (game)
+	{
+		if (game->mlx_ptr)
+		{
+			mlx_terminate(game->mlx_ptr);
+		}
+		free(game);
+	}
+}
 
-	if (argc != 2)
-		return (return_error("Wrong number of arguments.\n[USAGE]./cub3D /maps/valid_map.cub", 1));
-	map = (t_map){0};
-	map.map_path = argv[1];
-	if (!validate_map(&map))
-		return (return_error("Invalid map!", 1));
-	else
-		ft_printf("Ready to continue\n");
+void	init_mock_player_and_map(t_game *game)
+{
+	game->map.grid = malloc(sizeof(char *) * 6);
+	game->map.grid[0] = ft_strdup("11111");
+	game->map.grid[1] = ft_strdup("10101");
+	game->map.grid[2] = ft_strdup("10001");
+	game->map.grid[3] = ft_strdup("11001");
+	game->map.grid[4] = ft_strdup("11111");
+	game->map.grid[5] = NULL;
+	game->map.width = 5;
+	game->map.height = 5;
+
+	game->player.pos_x = 2.5;
+	game->player.pos_y = 2.5;
+	game->player.dir_x = 0.0;
+	game->player.dir_y = -1.0;
+	game->player.plane_x = 0.66;
+	game->player.plane_y = 0.0;
+	game->player.mov_speed = 0.08;
+	game->player.rot_speed = 0.05;
+}
+
+int	main(void)
+{
+	t_game	*game;
+
+	game = malloc(sizeof(t_game));
+	if (!game)
+		return (TRUE);
+	game->mlx_ptr = NULL;
+	game->screen = NULL;
+
+    init_mock_player_and_map(game);
+
+	game->map.ceiling_color = 0x3388FFFF;
+	game->map.floor_color = 0x553311FF;
+	if (init_mlx(game) == FAILURE)
+	{
+		free_fake_game(game);
+		return (FALSE);
+	}
+	render_frame(game);
+	mlx_key_hook(game->mlx_ptr, close_key_hook, game);
+    mlx_close_hook(game->mlx_ptr, close_window_hook, game);
+	
+    mlx_loop_hook(game->mlx_ptr, update_game, game);
+    mlx_loop(game->mlx_ptr);
+	free_fake_game(game);
 	return (0);
 }

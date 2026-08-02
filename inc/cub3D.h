@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/24 13:20:42 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/01 15:46:18 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,9 @@
 
 # define TILE_SIZE 32
 
+# define WIDTH 1280
+# define HEIGHT 720
+
 // Map characters
 # define EMPTY '0'
 # define WALL '1'
@@ -47,21 +50,10 @@
 # define PLAYER_W 'W'
 
 // Textures directions
-#define TEX_NO 0
-#define TEX_SO 1
-#define TEX_WE 2
-#define TEX_EA 3
-
-// Keycodes
-# define KEY_ESC 65307
-# define KEY_W 119
-# define KEY_A 97
-# define KEY_S 115
-# define KEY_D 100
-# define KEY_UP 65362
-# define KEY_LF 65361
-# define KEY_DW 65364
-# define KEY_RG 65363
+# define TEX_NO 0
+# define TEX_SO 1
+# define TEX_WE 2
+# define TEX_EA 3
 
 /* ========================================================================
 ** FUNCTION PROTOTYPES
@@ -89,6 +81,24 @@ void	find_player(t_map *map, int *px, int *py, char *dir);
 
 /* Inits */
 t_map	init_map(char *filename);
+int		init_mlx(t_game *game);
+
+/* Rendering */
+void	put_pixel(t_game *game, int x, int y, uint32_t color);
+void	render_frame(t_game *game);
+void	render_background(t_game *game);
+
+/* Hooks*/
+void	close_key_hook(mlx_key_data_t key, void *param);
+void	close_window_hook(void *param);
+void	update_game(void *param);
+void	move_forward(t_game *game);
+void	move_backward(t_game *game);
+void	move_left(t_game *game);
+void	move_right(t_game *game);
+void	rotate_right(t_game *game);
+void	rotate_left(t_game *game);
+int	check_collision(t_game *game, double x, double y);
 
 /* Utility functions */
 char	**create_grid(t_map *map);
