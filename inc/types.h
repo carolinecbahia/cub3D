@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:00 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/24 12:45:14 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/01 14:25:43 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 ** STRUCTURES
 ** ======================================================================== */
 
-typedef struct s_vectors
+typedef struct	s_vectors
 {
-	int x;
-	int y;
-}   t_vectors;
+	int	x;
+	int	y;
+}	t_vectors;
 
 typedef struct	s_map
 {
@@ -37,7 +37,7 @@ typedef struct	s_map
 	char	player_dir;
 }	t_map;
 
-typedef struct s_player
+typedef struct	s_player
 {
 	double	pos_x;
 	double	pos_y;
@@ -47,20 +47,9 @@ typedef struct s_player
 	double	plane_y;
 	double	mov_speed;
 	double	rot_speed;
-}   t_player;
+}	t_player;
 
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		width;
-	int		height;
-}   t_img;
-
-typedef struct s_ray
+typedef struct	s_ray
 {
 	double	camera_x;
 	double	raydir_x;
@@ -78,15 +67,14 @@ typedef struct s_ray
 	int		side;
 }	t_ray;
 
-typedef struct s_game
+typedef struct	s_game
 {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_map		map;
-	t_player	player;
-	t_img		textures[4];
-	t_img		screen;
-	int			running;
-}   t_game;
+	mlx_t			*mlx_ptr;
+	t_map			map;
+	t_player		player;
+	mlx_texture_t	*textures[4];
+	mlx_image_t		*screen;
+	int				running;
+}	t_game;
 
 #endif
