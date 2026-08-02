@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/01 15:46:18 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/02 03:45:01 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,14 @@ void	move_right(t_game *game);
 void	rotate_right(t_game *game);
 void	rotate_left(t_game *game);
 int	check_collision(t_game *game, double x, double y);
+
+/* Raycasting*/
+void		raycasting(t_game *game);
+void		init_step_side(t_game *game, t_ray *ray);
+void        init_ray(t_game *game, t_ray *ray, int x);
+void		perform_dda(t_game *game, t_ray *ray);
+uint32_t	get_wall_color(t_ray *ray);
+void	draw_vertical_line(t_game *game, int x, t_vectors limits, uint32_t color);
 
 /* Utility functions */
 char	**create_grid(t_map *map);
