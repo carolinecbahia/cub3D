@@ -29,7 +29,7 @@ typedef struct	s_map
 	int		width;
 	int		height;
 	char	*map_path;
-	char	textures_path[4];
+	char	*textures_path[4];
 	int		floor_color;
 	int		ceiling_color;
 	int		player_x;

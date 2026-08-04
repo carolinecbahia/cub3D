@@ -12,3 +12,17 @@
 
 #include "cub3D.h"
 
+static	int count_lines(int fd)
+{
+	char	*line;
+	int		count;
+	
+	count = 0;
+	line = NULL;
+	while((line = get_next_line(fd)))
+	{
+		count++;
+		free(line);
+	}
+	return (count);
+}

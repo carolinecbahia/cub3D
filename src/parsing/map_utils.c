@@ -25,9 +25,28 @@ int	open_file(char *filename)
 	return (fd);
 }
 
-void	read_lines(void)
+char	**read_lines(char *filename)
 {
+	int		fd;
+	int		line_count;
+	int		i;
+	char	*buffer;
+	char	**file_lines;
 
+	fd = open_file(filename);
+	line_count = count_lines(fd);
+	close(fd);
+	file_lines = malloc(sizeof(char *) * (line_count + 1));
+	fd = open_file(filename);
+	i = 0;
+	while((buffer = get_next_line(fd)))
+	{
+		file_lines[i] = buffer;
+		i++;
+	}
+	file_lines[i] = NULL;
+	close(fd);
+	return(file_lines);
 }
 
 t_map	init_map(char *filename)
@@ -38,7 +57,7 @@ t_map	init_map(char *filename)
 	map.grid = NULL;
 	map.width = 0;
 	map.height = 0;
-	ft_memset(map.textures_path, 0, 4);
+	ft_memset(map.textures_path, 0, sizeof(map.textures_path));
 	map.floor_color = 0;
 	map.ceiling_color = 0;
 	map.player_x = 0;

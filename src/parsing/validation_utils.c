@@ -25,9 +25,13 @@ int		validate_rgb(t_map *map __attribute__((unused)))
 int	check_file_extension(char *filename, char *extension)
 {
 	size_t len;
+	size_t ext_len;
 
 	len = ft_strlen(filename);
-	if (ft_strcmp(filename + len - 4, extension) != 0)
+	ext_len = ft_strlen(extension);
+	if (len < ext_len)
 		return (return_error("Wrong file extension!\n", 0));
-	return (1);
+	if (ft_strcmp(filename + len - ext_len, extension) != 0)
+		return (return_error("Wrong file extension!\n", 0));
+	return (1)
 }

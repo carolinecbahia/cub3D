@@ -64,7 +64,7 @@ int	validate_texture_slot(char **slot __attribute__((unused)), t_map *map __attr
 	return (0);
 }
 
-void	parse_texture_line(char **lines __attribute__((unused)))
+void	parse_texture_line(char *line, t_map *map)
 {
 
 }

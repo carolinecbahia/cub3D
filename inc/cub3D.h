@@ -70,7 +70,7 @@
 /* Map Parsing and Validations */
 int		check_file_extension(char *filename, char *extension);
 int		open_file(char *filename);
-void	read_lines(void);
+char	**read_lines(char *filename);
 int		validate_file(char *filename);
 void	parse_texture_line(char **lines);
 int		validate_texture_slot(char **slot, t_map *map, char dir);
