@@ -51,6 +51,7 @@
 #define TEX_SO 1
 #define TEX_WE 2
 #define TEX_EA 3
+#define TEX_COUNT 4
 
 // Keycodes
 # define KEY_ESC 65307
@@ -86,6 +87,9 @@ int		check_map_borders(t_map *map);
 int		flood_fill(t_game *game, t_map *map);
 int		build_map_row(char **grid, int i, char *line, int width);
 void	find_player(t_map *map, int *px, int *py, char *dir);
+int		count_lines(int fd);
+char	*extract_texture_path(char *line);
+int		 parse_rgb(char *rgb_str, int *r, int *g, int *b);
 
 /* Inits */
 t_map	init_map(char *filename);
@@ -96,5 +100,6 @@ char	**dup_grid(t_map *map);
 void	ft_err(char *msg);
 int		return_error(char *msg, int err);
 void	ft_free_matrix(char **matrix);
+void	free_split(char **split);
 
 #endif

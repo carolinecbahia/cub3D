@@ -58,8 +58,8 @@ t_map	init_map(char *filename)
 	map.width = 0;
 	map.height = 0;
 	ft_memset(map.textures_path, 0, sizeof(map.textures_path));
-	map.floor_color = 0;
-	map.ceiling_color = 0;
+	map.floor_color = -1;
+	map.ceiling_color = -1;
 	map.player_x = 0;
 	map.player_y = 0;
 	map.player_dir = 0;

@@ -12,13 +12,24 @@
 
 #include "cub3D.h"
 
-int	validate_texture_path(t_map *map __attribute__((unused)))
+int	check_all_textures(t_map *map)
 {
+	int i;
+
+	i = 0;
+	while(i < TEX_COUNT)
+	{
+		if (!map->textures_path[i])
+			return (return_error("Missing texture\n", 0));
+		i++;
+	}
 	return (1);
 }
 
-int		validate_rgb(t_map *map __attribute__((unused)))
+int	check_all_colors(t_map *map)
 {
+	if (map->floor_color == -1 || map->ceiling_color == -1)
+		return (return_error("Missing color\n", 0));
 	return (1);
 }
 

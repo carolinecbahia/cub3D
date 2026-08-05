@@ -21,7 +21,7 @@ typedef struct s_vectors
 {
 	int x;
 	int y;
-}   t_vectors;
+}	t_vectors;
 
 typedef struct	s_map
 {
@@ -35,7 +35,7 @@ typedef struct	s_map
 	int		player_x;
 	int		player_y;
 	char	player_dir;
-}	t_map;
+}t_map;
 
 typedef struct s_player
 {
@@ -47,7 +47,7 @@ typedef struct s_player
 	double	plane_y;
 	double	mov_speed;
 	double	rot_speed;
-}   t_player;
+}	t_player;
 
 typedef struct s_img
 {
@@ -58,7 +58,7 @@ typedef struct s_img
 	int		endian;
 	int		width;
 	int		height;
-}   t_img;
+}	t_img;
 
 typedef struct s_ray
 {

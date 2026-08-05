@@ -12,7 +12,7 @@
 
 #include "cub3D.h"
 
-static	int count_lines(int fd)
+int	count_lines(int fd)
 {
 	char	*line;
 	int		count;
@@ -25,4 +25,27 @@ static	int count_lines(int fd)
 		free(line);
 	}
 	return (count);
+}
+
+int	parse_rgb(char *rgb_str, int *r, int *g, int *b)
+{
+	char	**rgb_values;
+	int		i;
+
+	rgb_values = ft_split(rgb_str, ',');
+	if (!rgb_values)
+		return (return_error("Failed to split RGB values\n", 0));
+	i = 0;
+	while (rgb_values[i])
+		i++;
+	if (i != 3)
+	{
+		free_split(rgb_values);
+		return (return_error("Invalid RGB format\n", 0));
+	}
+	*r = ft_atoi(rgb_values[0]);
+	*g = ft_atoi(rgb_values[1]);
+	*b = ft_atoi(rgb_values[2]);
+	free_split(rgb_values);
+	return (1);
 }
