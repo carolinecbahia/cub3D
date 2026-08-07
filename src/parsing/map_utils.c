@@ -37,16 +37,25 @@ char	**read_lines(char *filename)
 	line_count = count_lines(fd);
 	close(fd);
 	file_lines = malloc(sizeof(char *) * (line_count + 1));
+	if (!file_lines)
+		return (NULL);
 	fd = open_file(filename);
 	i = 0;
-	while((buffer = get_next_line(fd)))
+	while ((buffer = get_next_line(fd)))
 	{
-		file_lines[i] = buffer;
+		file_lines[i] = ft_strtrim(buffer, "\n");
+		free(buffer);
+		if (!file_lines[i])
+		{
+			ft_free_matrix(file_lines);
+			close(fd);
+			return (NULL);
+		}
 		i++;
 	}
 	file_lines[i] = NULL;
 	close(fd);
-	return(file_lines);
+	return (file_lines);
 }
 
 t_map	init_map(char *filename)
