@@ -40,13 +40,13 @@ int	parse_rgb(char *rgb_str, int *r, int *g, int *b)
 		i++;
 	if (i != 3)
 	{
-		free_matrix(rgb_values);
+		ft_free_matrix(rgb_values);
 		return (return_error("Invalid RGB format\n", 0));
 	}
 	*r = ft_atoi(rgb_values[0]);
 	*g = ft_atoi(rgb_values[1]);
 	*b = ft_atoi(rgb_values[2]);
-	free_matrix(rgb_values);
+	ft_free_matrix(rgb_values);
 	return (1);
 }
 

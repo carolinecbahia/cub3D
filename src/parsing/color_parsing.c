@@ -12,7 +12,7 @@
 
 #include "cub3D.h"
 
-static int	find_colors(char *line, char type)
+int	find_colors(char *line, char type)
 {
 	if (type == 'F')
 		return (ft_strncmp(line, "F", 1) == 0);

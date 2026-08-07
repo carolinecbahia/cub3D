@@ -44,5 +44,5 @@ int	check_file_extension(char *filename, char *extension)
 		return (return_error("Wrong file extension!\n", 0));
 	if (ft_strcmp(filename + len - ext_len, extension) != 0)
 		return (return_error("Wrong file extension!\n", 0));
-	return (1)
+	return (1);
 }

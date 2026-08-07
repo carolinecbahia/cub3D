@@ -73,10 +73,12 @@ int		check_file_extension(char *filename, char *extension);
 int		open_file(char *filename);
 char	**read_lines(char *filename);
 int		validate_file(char *filename);
-void	parse_texture_line(char **lines);
+int		parse_texture_line(char *line, t_map *map);
 int		validate_texture_slot(char **slot, t_map *map, char dir);
 int		validate_texture_path(t_map *map);
-void	parse_color_line(char **lines);
+int		valid_texture_line(char *line, char dir);
+int		find_colors(char *line, char type);
+int		parse_color_line(char *line, t_map *map);
 int		validate_rgb(t_map *map);
 int		validate_map(t_map *map);
 int		validate_map_content(t_map *map);
@@ -86,9 +88,8 @@ void	find_player_pos(t_game *game, t_vectors *pos);
 int		check_map_borders(t_map *map);
 int		flood_fill(t_game *game, t_map *map);
 int		build_map_row(char **grid, int i, char *line, int width);
-void	find_player(t_map *map, int *px, int *py, char *dir);
+int		find_player(t_map *map, int *px, int *py, char *dir);
 int		count_lines(int fd);
-char	*extract_texture_path(char *line);
 int		parse_rgb(char *rgb_str, int *r, int *g, int *b);
 int		is_map_line(char *line);
 int		is_empty_line(char	*line);
@@ -97,10 +98,11 @@ int		is_empty_line(char	*line);
 t_map	init_map(char *filename);
 
 /* Utility functions */
-char	**create_grid(t_map *map);
+int		create_grid(t_map *map)
 char	**dup_grid(t_map *map);
 void	ft_err(char *msg);
 int		return_error(char *msg, int err);
 void	ft_free_matrix(char **matrix);
+
 
 #endif

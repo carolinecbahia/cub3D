@@ -12,7 +12,7 @@
 
 #include "cub3D.h"
 
-static int	valid_texture_line(char *line, char dir)
+int	valid_texture_line(char *line, char dir)
 {
 	if (dir == 'N')
 		return (ft_strncmp(line, "NO", 2) == 0);

@@ -71,7 +71,7 @@ int	create_grid(t_map *map)
 
 	grid = ft_calloc(map->height + 1, sizeof(char *));
 	if (!grid)
-		return(return_error("Malloc failed\n"), 0);
+		return (return_error("Malloc failed\n", 0));
 	i = 0;
 	while (i < map->height)
 	{
@@ -113,7 +113,7 @@ static	int	fill_map_grid(char **file_lines, int start, t_map *map)
 	return (1);
 }
 
-int find_player(t_map *map, int *px, int *py, char *dir)
+int	find_player(t_map *map, int *px, int *py, char *dir)
 {
 	int	i;
 	int	j;
@@ -138,6 +138,6 @@ int find_player(t_map *map, int *px, int *py, char *dir)
 		i++;
 	}
 	if (*dir == 0)
-		return (return_error("Player not found\n"));
+		return (return_error("Player not found\n", 0));
 	return (1);
 }
