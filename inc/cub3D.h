@@ -93,12 +93,14 @@ int		count_lines(int fd);
 int		parse_rgb(char *rgb_str, int *r, int *g, int *b);
 int		is_map_line(char *line);
 int		is_empty_line(char	*line);
+int		check_all_textures(t_map *map);
+int		check_all_colors(t_map *map);
 
 /* Inits */
 t_map	init_map(char *filename);
 
 /* Utility functions */
-int		create_grid(t_map *map)
+int		create_grid(t_map *map);
 char	**dup_grid(t_map *map);
 void	ft_err(char *msg);
 int		return_error(char *msg, int err);
