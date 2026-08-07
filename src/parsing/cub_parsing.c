@@ -12,51 +12,44 @@
 
 #include "cub3D.h"
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wunused-function"
-
-static int line_len_no_nl(char *line)
+int	parse_textures(char **file_lines, t_map *map)
 {
-	int	len;
-
-	len = 0;
-	while (line[len] != '\0')
-	{
-		len++;
-	}
-	return (len);
-}
-
-static int copy_line_to_row(char *row __attribute__((unused)), char *line __attribute__((unused)), int width __attribute__((unused)))
-{
-	return (0);
-}
-
-static int is_map_block_line(char *line)
-{
-	int i;
+	int	i;
 
 	i = 0;
-	if (line[i] == 'F' || line[i] == 'C')
-		return (0);
-	if (ft_strncmp(line, "NO ", 3) || ft_strncmp(line, "SE ", 3)
-		|| ft_strncmp(line, "EA ", 3) || ft_strncmp(line, "WE ", 3))
-		return (0);
-	return (1);
-}
-
-static int is_blank_line(char *line)
-{
-	if (line == NULL || line[0] == '\0')
+	while(file_lines[i])
 	{
-		return (0);
+		if (valid_texture_line(file_lines[i], 'N')
+			|| valid_texture_line(file_lines[i], 'S')
+			|| valid_texture_line(file_lines[i], 'W')
+			|| valid_texture_line(file_lines[i], 'E'))
+		{
+			if (!parse_texture_line(file_lines[i], map))
+				return (0);
+		}
+		i++;
 	}
+	if (!check_all_textures(map))
+		return (0);
 	return (1);
 }
 
-#pragma GCC diagnostic pop
-
-int build_map_row(char **grid __attribute__((unused)), int i __attribute__((unused)), char *line __attribute__((unused)), int width __attribute__((unused)))
+int	parse_colors(char **file_lines, t_map *map)
 {
-	return (0);
+	int	i;
+
+	i = 0;
+	while (file_lines[i])
+	{
+		if (find_colors(file_lines[i], 'F') || find_colors(file_lines[i], 'C'))
+		{
+			if (!parse_color_line(file_lines[i], map))
+				return (0);
+		}
+		i++;
+	}
+	if (!check_all_colors(map))
+		return (0);
+	return (1);
 }
+

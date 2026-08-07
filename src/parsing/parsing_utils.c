@@ -40,12 +40,42 @@ int	parse_rgb(char *rgb_str, int *r, int *g, int *b)
 		i++;
 	if (i != 3)
 	{
-		free_split(rgb_values);
+		free_matrix(rgb_values);
 		return (return_error("Invalid RGB format\n", 0));
 	}
 	*r = ft_atoi(rgb_values[0]);
 	*g = ft_atoi(rgb_values[1]);
 	*b = ft_atoi(rgb_values[2]);
-	free_split(rgb_values);
+	free_matrix(rgb_values);
 	return (1);
+}
+
+int	is_map_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if ((line[i] != '0') && (line[i] != '1') && (line[i] != 'N')
+			&& (line[i] != 'S') && (line[i] != 'E') && (line[i] != 'W')
+			&& (line[i] != ' ') && (line[i] != '\t'))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	is_empty_line(char	*line)
+{
+	int	i;
+
+	i = 0;
+	while(line[i] == ' ' || line[i] == '\t')
+	{
+		i++;
+	}
+	if (line[i] == '\0')
+		return (1);
+	return (0);
 }
