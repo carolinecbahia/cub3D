@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:10:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/01 15:47:23 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/10 17:42:33 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,11 @@ static void	free_fake_game(t_game *game)
 {
 	if (game)
 	{
+		destroy_textures(game);
 		if (game->mlx_ptr)
 		{
 			mlx_terminate(game->mlx_ptr);
+			game->mlx_ptr = NULL; // ◄── Zera o ponteiro para evitar double-terminate
 		}
 		free(game);
 	}
