@@ -16,6 +16,7 @@ CC			= gcc
 
 SRC_DIR			= src/
 INC_DIR			= inc/
+BONUS_SRC_DIR 	= src_bonus/
 BONUS_INC_DIR	= inc_bonus/
 OBJ_DIR			= obj/
 DEP_DIR			= dep/
