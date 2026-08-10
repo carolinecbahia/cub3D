@@ -6,29 +6,39 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:13:30 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/10 18:29:47 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/10 19:26:59 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
-static void	free_fake_game(t_game *game)
+#include "cub3D_bonus.h"
+
+static void	free_fake_game(t_game *game, t_bonus *bonus)
 {
-	if (game)
+	if (!game)
+		return;
+	if (bonus->floor_texture)
 	{
-		destroy_textures(game);
-		if (game->mlx_ptr)
-		{
-			mlx_terminate(game->mlx_ptr);
-			game->mlx_ptr = NULL;
-		}
-		free(game);
+		mlx_delete_texture(bonus->floor_texture);
+		game->floor_texture = NULL;
 	}
+	destroy_textures(game);
+	if (game->mlx_ptr)
+	{
+		mlx_terminate(game->mlx_ptr);
+		game->mlx_ptr = NULL;
+	}
+	if (game->map.grid)
+		free_map(game->map.grid);
+	free(game);
 }
 
-void	init_mock_player_and_map(t_game *game)
+static void	init_mock_player_and_map(t_game *game)
 {
 	game->map.grid = malloc(sizeof(char *) * 6);
+	if (!game->map.grid)
+		return;
 	game->map.grid[0] = ft_strdup("11111");
 	game->map.grid[1] = ft_strdup("10101");
 	game->map.grid[2] = ft_strdup("10001");
@@ -49,33 +59,45 @@ void	init_mock_player_and_map(t_game *game)
 
 int	main(void)
 {
-	t_game	*game;
-	game = malloc(sizeof(t_game));
+	t_game			*game;
+	mlx_texture_t	*floor_texture;
+
+	game = ft_calloc(1, sizeof(t_game));
 	if (!game)
-		return (TRUE);
-	game->mlx_ptr = NULL;
-	game->screen = NULL;
+		return (EXIT_FAILURE);
+
 	init_mock_player_and_map(game);
+
 	game->map.ceiling_color = 0x3388FFFF;
 	game->map.floor_color = 0x553311FF;
+
 	if (init_mlx(game) == FAILURE)
 	{
 		free_fake_game(game);
-		return (FALSE);
+		return (EXIT_FAILURE);
 	}
-	
-	// Trava o mouse no centro e oculta nativamente
+
+	floor_texture = mlx_load_png(
+		"/home/carol/42cursus/04/cub3D/textures/bonus/floor/floor.png");
+	if (!floor_texture)
+	{
+		free_fake_game(game);
+		return (EXIT_FAILURE);
+	}
+
+	game->floor_texture = floor_texture;
+
 	mlx_set_cursor_mode(game->mlx_ptr, MLX_MOUSE_DISABLED);
-	
+
 	render_frame(game);
+
 	mlx_key_hook(game->mlx_ptr, close_key_hook, game);
 	mlx_close_hook(game->mlx_ptr, close_window_hook, game);
-	
-	// Registra o hook do cursor do mouse
 	mlx_cursor_hook(game->mlx_ptr, mouse_rotation_hook, game);
-	
 	mlx_loop_hook(game->mlx_ptr, update_game, game);
+
 	mlx_loop(game->mlx_ptr);
+
 	free_fake_game(game);
-	return (0);
+	return (EXIT_SUCCESS);
 }

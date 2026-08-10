@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/10 17:37:37 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/10 19:20:19 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ int		init_mlx(t_game *game);
 /* Rendering */
 void	put_pixel(t_game *game, int x, int y, uint32_t color);
 void	render_frame(t_game *game);
+void	render_ceiling_color(t_game *game);
+void	render_floor_color(t_game *game);
 void	render_background(t_game *game);
 int     load_all_textures(t_game *game);
 void    destroy_textures(t_game *game);
@@ -101,7 +103,7 @@ void	move_left(t_game *game);
 void	move_right(t_game *game);
 void	rotate_right(t_game *game);
 void	rotate_left(t_game *game);
-int	check_collision(t_game *game, double x, double y);
+int		check_collision(t_game *game, double x, double y);
 
 /* Raycasting*/
 void		raycasting(t_game *game);

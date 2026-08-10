@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:01:51 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/10 18:29:55 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/10 19:26:05 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 ** ======================================================================== */
 
 # include "cub3D.h"
+# include "types_bonus.h"
 # include <GLFW/glfw3.h>
 
 /* ========================================================================
@@ -30,5 +31,8 @@
 
 /* Hooks */
 void	mouse_rotation_hook(double xpos, double ypos, void *param);
+
+/* Rendering */
+void	render_floor(t_game *game, mlx_texture_t *texture);
 
 #endif

@@ -29,7 +29,7 @@ MLX42_DIR	= MLX42
 # ============================================================================
 
 MAP			?= maps/valid/random_valid_1.cub
-ARGS		?= 
+ARGS		?=
 
 # ============================================================================
 # FLAGS
@@ -122,7 +122,9 @@ MANDATORY_SRC = \
 
 BONUS_SRC = \
 	src_bonus/main_bonus.c \
-	src_bonus/hooks/mouse_hook.c
+	src_bonus/hooks/mouse_hook.c \
+	src_bonus/rendering/render_frame_bonus.c \
+	src_bonus/rendering/render_floor.c
 
 # ============================================================================
 # OBJECTS
