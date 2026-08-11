@@ -6,22 +6,20 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 18:13:30 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/10 19:26:59 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/11 12:28:14 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
 
-#include "cub3D_bonus.h"
-
-static void	free_fake_game(t_game *game, t_bonus *bonus)
+static void	free_fake_game_bonus(t_game *game, t_game_bonus *bonus)
 {
 	if (!game)
 		return;
 	if (bonus->floor_texture)
 	{
 		mlx_delete_texture(bonus->floor_texture);
-		game->floor_texture = NULL;
+		bonus->floor_texture = NULL;
 	}
 	destroy_textures(game);
 	if (game->mlx_ptr)
@@ -29,8 +27,6 @@ static void	free_fake_game(t_game *game, t_bonus *bonus)
 		mlx_terminate(game->mlx_ptr);
 		game->mlx_ptr = NULL;
 	}
-	if (game->map.grid)
-		free_map(game->map.grid);
 	free(game);
 }
 
@@ -60,44 +56,46 @@ static void	init_mock_player_and_map(t_game *game)
 int	main(void)
 {
 	t_game			*game;
+	t_game_bonus	*bonus;
 	mlx_texture_t	*floor_texture;
 
 	game = ft_calloc(1, sizeof(t_game));
-	if (!game)
+	bonus = ft_calloc(1, sizeof(t_game_bonus));
+	if (!game || !bonus)
 		return (EXIT_FAILURE);
 
 	init_mock_player_and_map(game);
+	bonus->game = game;
 
 	game->map.ceiling_color = 0x3388FFFF;
-	game->map.floor_color = 0x553311FF;
 
 	if (init_mlx(game) == FAILURE)
 	{
-		free_fake_game(game);
+		free_fake_game_bonus(game, bonus);
 		return (EXIT_FAILURE);
 	}
 
 	floor_texture = mlx_load_png(
-		"/home/carol/42cursus/04/cub3D/textures/bonus/floor/floor.png");
+		"textures/bonus/floor/floor.png");
 	if (!floor_texture)
 	{
-		free_fake_game(game);
+		free_fake_game_bonus(game, bonus);
 		return (EXIT_FAILURE);
 	}
 
-	game->floor_texture = floor_texture;
+	bonus->floor_texture = floor_texture;
 
 	mlx_set_cursor_mode(game->mlx_ptr, MLX_MOUSE_DISABLED);
 
-	render_frame(game);
+	render_frame_bonus(game, bonus);
 
 	mlx_key_hook(game->mlx_ptr, close_key_hook, game);
 	mlx_close_hook(game->mlx_ptr, close_window_hook, game);
 	mlx_cursor_hook(game->mlx_ptr, mouse_rotation_hook, game);
-	mlx_loop_hook(game->mlx_ptr, update_game, game);
+	mlx_loop_hook(game->mlx_ptr, update_game_bonus, bonus);
 
 	mlx_loop(game->mlx_ptr);
 
-	free_fake_game(game);
+	free_fake_game_bonus(game, bonus);
 	return (EXIT_SUCCESS);
 }

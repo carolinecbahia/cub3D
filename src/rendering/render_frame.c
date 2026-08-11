@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 13:47:24 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/02 03:41:22 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/11 12:06:58 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void	draw_square(t_game *game, int start_x, int start_y, int size, uint32
 	}
 }
 
-static void	draw_debug_minimap(t_game *game)
+void	draw_debug_minimap(t_game *game)
 {
 	int	x;
 	int	y;

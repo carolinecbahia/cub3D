@@ -6,12 +6,11 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 22:08:02 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/24 13:20:30 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/11 11:44:17 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-#include "../libft/inc/libft.h"
 
 int	open_file(char *filename)
 {
@@ -25,10 +24,10 @@ int	open_file(char *filename)
 	return (fd);
 }
 
-void	read_lines(void)
-{
+// void	read_lines(void)
+// {
 
-}
+// }
 
 t_map	init_map(char *filename)
 {

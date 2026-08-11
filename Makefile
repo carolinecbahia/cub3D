@@ -123,6 +123,7 @@ MANDATORY_SRC = \
 BONUS_SRC = \
 	src_bonus/main_bonus.c \
 	src_bonus/hooks/mouse_hook.c \
+	src_bonus/hooks/update_hook_bonus.c \
 	src_bonus/rendering/render_frame_bonus.c \
 	src_bonus/rendering/render_floor.c
 

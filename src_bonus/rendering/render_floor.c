@@ -6,16 +6,18 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/10 19:05:39 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/10 19:22:04 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/11 12:08:16 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D_bonus.h"
+
 static double	get_row_distance(t_game *game, int y)
 {
 	double	camera_height;
 	double	row;
 
+	(void)game;
 	camera_height = 0.5;
 	row = (double)y - (double)HEIGHT / 2.0;
 	return ((camera_height * (double)HEIGHT) / row);
