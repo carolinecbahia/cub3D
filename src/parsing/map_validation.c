@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:51:57 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/10 15:57:25 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/13 13:02:56 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	validate_map_content(t_map *map)
 		i++;
 	}
 	if (!find_player(map, &map->player_x,
-		&map->player_y, &map->player_dir))
+			&map->player_y, &map->player_dir))
 		return (0);
 	if (!validate_borders(map))
 		return (return_error("Map is not closed\n", 0));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:55:18 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/24 13:22:04 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/13 14:35:23 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 int	find_map_start(char **file_lines)
 {
 	int	i;
+
 	i = 0;
 	while (file_lines[i])
 	{
-		if (is_empty_line(file_lines[i]) || find_colors(file_lines[i], 'F') 
-			|| find_colors(file_lines[i], 'C') 
+		if (is_empty_line(file_lines[i]) || find_colors(file_lines[i], 'F')
+			|| find_colors(file_lines[i], 'C')
 			||valid_texture_line(file_lines[i], 'N')
 			|| valid_texture_line(file_lines[i], 'S')
 			|| valid_texture_line(file_lines[i], 'W')
@@ -60,7 +61,7 @@ int	create_grid(t_map *map)
 	return (1);
 }
 
-static	int	fill_map_grid(char **file_lines, int start, t_map *map)
+int	fill_map_grid(char **file_lines, int start, t_map *map)
 {
 	int	i;
 	int	j;
@@ -91,7 +92,7 @@ int	find_player(t_map *map, int *px, int *py, char *dir)
 	int	j;
 
 	i = 0;
-	while(i < map->height)
+	while (i < map->height)
 	{
 		j = 0;
 		while (j < map->width)
@@ -113,20 +114,3 @@ int	find_player(t_map *map, int *px, int *py, char *dir)
 	return (1);
 }
 
-int	parse_map(char **file_lines, t_map *map)
-{
-	int	start;
-
-	start = find_map_start(file_lines);
-	if (start < 0)
-		return (0);
-	if (!read_map_size(file_lines, start, map))
-		return (0);
-	if (!create_grid(map))
-		return (0);
-	if (!fill_map_grid(file_lines, start, map))
-		return (0);
-	if (!validate_map_content(map))
-		return (0);
-	return (1);
-}

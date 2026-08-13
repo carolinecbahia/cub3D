@@ -3,26 +3,55 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:10:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/18 00:13:11 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/13 14:38:16 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+#include "cub3D.h"
+#include <stdio.h>
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_map	map;
 
 	if (argc != 2)
-		return (return_error("Wrong number of arguments.\n[USAGE]./cub3D /maps/valid_map.cub", 1));
-	map = (t_map){0};
-	map.map_path = argv[1];
-	if (!validate_map(&map))
-		return (return_error("Invalid map!", 1));
-	else
-		ft_printf("Ready to continue\n");
+	{
+		printf("Uso: ./cub3D <mapa.cub>\n");
+		return (1);
+	}
+	printf("=== INICIO DO PARSER ===\n");
+	printf("[1] Inicializando map...\n");
+	map = init_map(argv[1]);
+	printf("[2] Chamando parse_file...\n");
+	if (!parse_file(argv[1], &map))
+	{
+		printf("[ERRO] parse_file falhou!\n");
+		return (1);
+	}
+	printf("[OK] parse_file terminou com sucesso!\n\n");
+	printf("=== MAP ===\n");
+	printf("map_path: %s\n", map.map_path);
+	printf("width: %d\n", map.width);
+	printf("height: %d\n", map.height);
+	printf("player_x: %d\n", map.player_x);
+	printf("player_y: %d\n", map.player_y);
+	printf("player_dir: %c\n", map.player_dir);
+	printf("\n=== GRID ===\n");
+	for (int i = 0; i < map.height; i++)
+		printf("[%02d] \"%s\"\n", i, map.grid[i]);
+	printf("\n=== TEXTURES ===\n");
+	printf("NO: %s\n", map.textures_path[0]);
+	printf("SO: %s\n", map.textures_path[1]);
+	printf("WE: %s\n", map.textures_path[2]);
+	printf("EA: %s\n", map.textures_path[3]);
+	printf("\n=== COLORS ===\n");
+	printf("Floor: %d\n", map.floor_color);
+	printf("Ceiling: %d\n", map.ceiling_color);
+	cleanup_map(&map, NULL);
+	printf("\n=== FIM ===\n");
 	return (0);
 }

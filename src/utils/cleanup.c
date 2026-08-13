@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:23:32 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/16 20:14:42 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/13 14:12:28 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,21 @@ void	ft_free_matrix(char **matrix)
 	free(matrix);
 }
 
-void	free_map()
+void	cleanup_map(t_map	*map, char **file_lines)
+{
+	int	i;
+
+	if (file_lines)
+		ft_free_matrix(file_lines);
+	if (!map)
+		return ;
+	ft_free_matrix(map->grid);
+	free(map->map_path);
+	i = 0;
+	while (i < 4)
+	{
+		if (map->textures_path[i])
+			free(map->textures_path[i]);
+		i++;
+	}
+}

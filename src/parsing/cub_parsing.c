@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_building.c                                     :+:      :+:    :+:   */
+/*   cub_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 13:40:36 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/24 13:21:48 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/13 14:13:32 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	parse_textures(char **file_lines, t_map *map)
 	int	i;
 
 	i = 0;
-	while(file_lines[i])
+	while (file_lines[i])
 	{
 		if (valid_texture_line(file_lines[i], 'N')
 			|| valid_texture_line(file_lines[i], 'S')
@@ -53,3 +53,48 @@ int	parse_colors(char **file_lines, t_map *map)
 	return (1);
 }
 
+int	parse_map(char **file_lines, t_map *map)
+{
+	int	start;
+
+	start = find_map_start(file_lines);
+	if (start < 0)
+		return (0);
+	if (!read_map_size(file_lines, start, map))
+		return (0);
+	if (!create_grid(map))
+		return (0);
+	if (!fill_map_grid(file_lines, start, map))
+		return (0);
+	if (!validate_map_content(map))
+		return (0);
+	return (1);
+}
+
+int	parse_file(char *filename, t_map *map)
+{
+	char	**file_lines;
+
+	if (!validate_file(filename))
+		return (0);
+	file_lines = read_lines(filename);
+	if (!file_lines)
+		return (0);
+	if (!(parse_textures(file_lines, map)))
+	{
+		cleanup_map(map, file_lines);
+		return (FAILURE);
+	}
+	if (!(parse_colors(file_lines, map)))
+	{
+		cleanup_map(map, file_lines);
+		return (FAILURE);
+	}
+	if (!(parse_map(file_lines, map)))
+	{
+		cleanup_map(map, file_lines);
+		return (FAILURE);
+	}
+	ft_free_matrix(file_lines);
+	return (SUCCESS);
+}

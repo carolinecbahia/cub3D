@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   grid_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 17:43:34 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/24 13:21:31 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/13 13:02:37 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int	has_open_neighbor(t_map *map, int i, int j)
 	return (0);
 }
 
-int read_map_size(char **file_lines, int start, t_map *map)
+int	read_map_size(char **file_lines, int start, t_map *map)
 {
-	int height;
+	int	height;
 	int	width;
 	int	i;
 	int	line_width;
@@ -52,7 +52,7 @@ int read_map_size(char **file_lines, int start, t_map *map)
 	i = start;
 	height = 0;
 	width = 0;
-	while(file_lines[i])
+	while (file_lines[i])
 	{
 		if (is_empty_line(file_lines[i]))
 			return (return_error("Empty line in map\n", 0));

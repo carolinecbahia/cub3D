@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_parsing.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:54:51 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/24 13:22:57 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/13 13:33:54 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	find_colors(char *line, char type)
 
 static char	*extract_rgb_values(char *line)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (line[i] != ' ' && line[i] != '\t')
@@ -32,7 +32,7 @@ static char	*extract_rgb_values(char *line)
 			i++;
 	if (line[i] == '\0')
 		return (NULL);
-	return(&line[i]);
+	return (&line[i]);
 }
 
 int	validate_rgb_values(int r, int g, int b)

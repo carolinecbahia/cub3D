@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 22:08:02 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/24 13:20:30 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/13 15:52:33 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	open_file(char *filename)
 {
-	int fd;
+	int	fd;
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
@@ -25,17 +25,20 @@ int	open_file(char *filename)
 	return (fd);
 }
 
-static	int	fill_file_lines(char **filename, char **file_lines)
+static	int	fill_file_lines(char *filename, char **file_lines)
 {
 	int		fd;
 	int		i;
 	char	*buffer;
 
 	fd = open_file(filename);
+	if (fd == -1)
+		return (0);
 	i = 0;
-	while ((buffer = get_next_line(fd)))
+	buffer = get_next_line(fd);
+	while (buffer != NULL)
 	{
-		file_lines[i] = ft_atoi_strtrim(buffer, "\n");
+		file_lines[i] = ft_strtrim(buffer, "\n");
 		free(buffer);
 		if (!file_lines[i])
 		{
@@ -43,6 +46,7 @@ static	int	fill_file_lines(char **filename, char **file_lines)
 			return (0);
 		}
 		i++;
+		buffer = get_next_line(fd);
 	}
 	close(fd);
 	return (1);
@@ -57,10 +61,10 @@ char	**read_lines(char *filename)
 	fd = open_file(filename);
 	line_count = count_lines(fd);
 	close(fd);
-	file_lines = ft_calloc(lines_count + 1, sizeof(char *));
+	file_lines = ft_calloc(line_count + 1, sizeof(char *));
 	if (!file_lines)
 		return (NULL);
-	if (!fill_file_lines(filename, file_line))
+	if (!fill_file_lines(filename, file_lines))
 	{
 		ft_free_matrix(file_lines);
 		return (NULL);

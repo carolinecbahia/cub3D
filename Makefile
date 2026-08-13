@@ -77,11 +77,6 @@ ARROW		= ➜
 # ============================================================================
 
 CORE_SRC = \
-	src/parsing/map_utils.c \
-	src/parsing/grid_utils.c \
-	src/parsing/map_building.c \
-	src/parsing/map_parsing.c \
-	src/parsing/parsing_utils.c \
 	src/utils/cleanup.c \
 	src/utils/errors.c \
 	src/utils/math_utils.c \
@@ -94,9 +89,13 @@ CORE_SRC = \
 MANDATORY_SRC = \
 	src/main.c \
 	src/parsing/color_parsing.c \
-	src/parsing/textures_parsing.c \
+	src/parsing/cub_parsing.c \
+	src/parsing/grid_utils.c \
+	src/parsing/map_parsing.c \
+	src/parsing/map_utils.c \
 	src/parsing/map_validation.c \
-	src/parsing/path_validation.c \
+	src/parsing/parsing_utils.c \
+	src/parsing/textures_parsing.c \
 	src/parsing/validation_utils.c \
 	src/game/init_game.c \
 	src/game/load_textures.c \
@@ -114,7 +113,7 @@ MANDATORY_SRC = \
 	src/hooks/movement.c \
 	src/hooks/rotation.c \
 	src/hooks/update_hook.c \
-	src/hooks/collision.c
+	src/hooks/collision.c 
 
 BONUS_SRC = \
 # src_bonus/main_bonus.c \

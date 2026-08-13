@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   validation_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:30:15 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/24 13:23:58 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/13 13:29:30 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	check_all_textures(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(i < TEX_COUNT)
+	while (i < TEX_COUNT)
 	{
 		if (!map->textures_path[i])
 			return (return_error("Missing texture\n", 0));
@@ -35,8 +35,8 @@ int	check_all_colors(t_map *map)
 
 int	check_file_extension(char *filename, char *extension)
 {
-	size_t len;
-	size_t ext_len;
+	size_t	len;
+	size_t	ext_len;
 
 	len = ft_strlen(filename);
 	ext_len = ft_strlen(extension);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   textures_parsing.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:53:48 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/24 13:23:19 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/13 13:51:44 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char	*extract_texture_path(char *line)
 			i++;
 	if (line[i] == '\0')
 		return (NULL);
-	return(&line[i]);
+	return (&line[i]);
 }
 
 static int	save_texture(char **slot, char *path)
@@ -59,7 +59,7 @@ static int	save_texture(char **slot, char *path)
 		*slot = ft_strdup(path);
 		if (!*slot)
 			return (return_error("Malloc failed\n", 0));
-		return(1);
+		return (1);
 	}
 	return (return_error("Duplicated texture\n", 0));
 }
@@ -76,10 +76,10 @@ int	parse_texture_line(char *line, t_map *map)
 	if (valid_texture_line(line, 'N'))
 		return (save_texture(&map->textures_path[TEX_NO], path));
 	if (valid_texture_line(line, 'S'))
-		return(save_texture(&map->textures_path[TEX_SO], path));
+		return (save_texture(&map->textures_path[TEX_SO], path));
 	if (valid_texture_line(line, 'W'))
-		return(save_texture(&map->textures_path[TEX_WE], path));
+		return (save_texture(&map->textures_path[TEX_WE], path));
 	if (valid_texture_line(line, 'E'))
-		return(save_texture(&map->textures_path[TEX_EA], path));
-	return (return_error("Inavlid texture identifier", 0));
+		return (save_texture(&map->textures_path[TEX_EA], path));
+	return (return_error("Invalid texture identifier\n", 0));
 }
