@@ -95,6 +95,8 @@ int		is_map_line(char *line);
 int		is_empty_line(char	*line);
 int		check_all_textures(t_map *map);
 int		check_all_colors(t_map *map);
+int     has_open_neighbor(t_map *map, int i, int j);
+int     read_map_size(char **file_lines, int start, t_map *map);
 
 /* Inits */
 t_map	init_map(char *filename);

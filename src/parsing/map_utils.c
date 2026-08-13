@@ -25,36 +25,46 @@ int	open_file(char *filename)
 	return (fd);
 }
 
-char	**read_lines(char *filename)
+static	int	fill_file_lines(char **filename, char **file_lines)
 {
 	int		fd;
-	int		line_count;
 	int		i;
 	char	*buffer;
-	char	**file_lines;
 
-	fd = open_file(filename);
-	line_count = count_lines(fd);
-	close(fd);
-	file_lines = malloc(sizeof(char *) * (line_count + 1));
-	if (!file_lines)
-		return (NULL);
 	fd = open_file(filename);
 	i = 0;
 	while ((buffer = get_next_line(fd)))
 	{
-		file_lines[i] = ft_strtrim(buffer, "\n");
+		file_lines[i] = ft_atoi_strtrim(buffer, "\n");
 		free(buffer);
 		if (!file_lines[i])
 		{
-			ft_free_matrix(file_lines);
 			close(fd);
-			return (NULL);
+			return (0);
 		}
 		i++;
 	}
-	file_lines[i] = NULL;
 	close(fd);
+	return (1);
+}
+
+char	**read_lines(char *filename)
+{
+	int		fd;
+	char	**file_lines;
+	int		line_count;
+
+	fd = open_file(filename);
+	line_count = count_lines(fd);
+	close(fd);
+	file_lines = ft_calloc(lines_count + 1, sizeof(char *));
+	if (!file_lines)
+		return (NULL);
+	if (!fill_file_lines(filename, file_line))
+	{
+		ft_free_matrix(file_lines);
+		return (NULL);
+	}
 	return (file_lines);
 }
 

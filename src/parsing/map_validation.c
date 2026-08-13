@@ -3,38 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:51:57 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/04/24 13:23:38 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/10 15:57:25 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-//TODO validate_identifiers()
-
-int	validate_map_char(char c)
-{
-	if (c == WALL || c == EMPTY || c == PLAYER_E || c == PLAYER_E
-		|| c == PLAYER_N || c == PLAYER_S || c == PLAYER_W)
-		return (1);
-	return (0);
-}
-
-//TODO validate_player()
-
-//TODO validate_borders()
-
-//TODO validate_closed_map()
-
 int	validate_file(char *filename)
 {
 	int		fd;
-	t_map	map;
 
-	map = init_map(filename);
-	(void)map;
 	if (!check_file_extension(filename, ".cub"))
 		return (0);
 	fd = open_file(filename);
@@ -44,20 +25,55 @@ int	validate_file(char *filename)
 	return (1);
 }
 
-int	validate_map_content(t_map *map __attribute__((unused)))
+int	validate_map_content(t_map *map)
 {
-	return (0);
+	int		i;
+	int		j;
+	char	c;
+
+	i = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while (j < map->width)
+		{
+			c = map->grid[i][j];
+			if (!validate_map_char(c))
+				return (return_error("Invalid map character\n", 0));
+			j++;
+		}
+		i++;
+	}
+	if (!find_player(map, &map->player_x,
+		&map->player_y, &map->player_dir))
+		return (0);
+	if (!validate_borders(map))
+		return (return_error("Map is not closed\n", 0));
+	return (1);
 }
 
-int		validate_map(t_map *map)
+int	validate_borders(t_map	*map)
 {
-	if (!validate_file(map->map_path))
-		return (0);
-	if(!validate_texture_path(map))
-		return (0);
-	if (!validate_rgb(map))
-		return (0);
-	if (!validate_map_content(map))
-		return (0);
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < map->height)
+	{
+		j = 0;
+		while (j < map->width)
+		{
+			if (map->grid[i][j] == EMPTY || is_player(map->grid[i][j]))
+			{
+				if (i == 0 || i == map->height - 1 || j == map->width - 1
+					|| j == 0)
+					return (0);
+				if (has_open_neighbor(map, i, j))
+					return (0);
+			}
+			j++;
+		}
+		i++;
+	}
 	return (1);
 }

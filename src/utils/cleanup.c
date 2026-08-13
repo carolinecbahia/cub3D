@@ -26,3 +26,5 @@ void	ft_free_matrix(char **matrix)
 	}
 	free(matrix);
 }
+
+void	free_map()

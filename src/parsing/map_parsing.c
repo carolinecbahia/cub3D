@@ -31,37 +31,9 @@ int	find_map_start(char **file_lines)
 		if (is_map_line(file_lines[i]))
 			return (i);
 		else
-			return (return_error("Map line is invalid\n", 0));
+			return (return_error("Map line is invalid\n", -1));
 	}
-	return (return_error("Map not found in archive\n", 0));
-}
-
-
-static int read_map_size(char **file_lines, int start, t_map *map)
-{
-	int height;
-	int	width;
-	int	i;
-	int	line_width;
-
-	i = start;
-	height = 0;
-	width = 0;
-	while(file_lines[i])
-	{
-		if (is_empty_line(file_lines[i]))
-			return (return_error("Empty line in map\n", 0));
-		if (!(is_map_line(file_lines[i])))
-			return (return_error("Invalid map\n", 0));
-		line_width = ft_strlen(file_lines[i]);
-		if (width < line_width)
-			width = line_width;
-		height++;
-		i++;
-	}
-	map->height = height;
-	map->width = width;
-	return (1);
+	return (return_error("Map not found in archive\n", -1));
 }
 
 int	create_grid(t_map *map)
@@ -124,8 +96,7 @@ int	find_player(t_map *map, int *px, int *py, char *dir)
 		j = 0;
 		while (j < map->width)
 		{
-			if (map->grid[i][j] == 'N' || map->grid[i][j] == 'S'
-				|| map->grid[i][j] == 'E' || map->grid[i][j] == 'W')
+			if (is_player(map->grid[i][j]))
 			{
 				if (*dir != 0)
 					return (return_error("Too many players\n", 0));
@@ -139,5 +110,23 @@ int	find_player(t_map *map, int *px, int *py, char *dir)
 	}
 	if (*dir == 0)
 		return (return_error("Player not found\n", 0));
+	return (1);
+}
+
+int	parse_map(char **file_lines, t_map *map)
+{
+	int	start;
+
+	start = find_map_start(file_lines);
+	if (start < 0)
+		return (0);
+	if (!read_map_size(file_lines, start, map))
+		return (0);
+	if (!create_grid(map))
+		return (0);
+	if (!fill_map_grid(file_lines, start, map))
+		return (0);
+	if (!validate_map_content(map))
+		return (0);
 	return (1);
 }

@@ -29,7 +29,7 @@ static int	valid_texture_path(char *path)
 {
 	int	fd;
 
-	if (!check_file_extension(path, ".xpm"))
+	if (!check_file_extension(path, ".png"))
 		return (0);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
