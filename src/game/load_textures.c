@@ -6,56 +6,56 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 16:34:37 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/10 17:26:45 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/13 13:36:28 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static mlx_texture_t    *load_single_texture(char *path)
+static mlx_texture_t	*load_single_texture(char *path)
 {
-    mlx_texture_t   *texture;
+	mlx_texture_t	*texture;
 
-    if(!path)
-        return (NULL);
-    texture = mlx_load_png(path);
-    if (!texture)
-    {
-        ft_putstr_fd("Error\nFailed to load texture: ", 2);
-        ft_putstr_fd(path, 2);
-        ft_putstr_fd("\n", 2);
-        return (NULL);
-    }
-    return (texture);
+	if (!path)
+		return (NULL);
+	texture = mlx_load_png(path);
+	if (!texture)
+	{
+		ft_putstr_fd("Error\nFailed to load texture: ", 2);
+		ft_putstr_fd(path, 2);
+		ft_putstr_fd("\n", 2);
+		return (NULL);
+	}
+	return (texture);
 }
 
-int load_all_textures(t_game *game)
+int	load_all_textures(t_game *game)
 {
-    char    *default_paths[4] = {"textures/walls/wall.png",
-    "textures/walls/wall.png", "textures/walls/wall.png",
-    "textures/walls/wall.png"};
-    int i;
+	char	*default_paths[4] = {"textures/walls/wall.png",
+		"textures/walls/wall.png", "textures/walls/wall.png",
+		"textures/walls/wall.png"};
+	int		i;
 
-    i = 0;
-    while (i < 4)
-    {
-        game->textures[i] = load_single_texture(default_paths[i]);
-        if (!game->textures[i])
-            return (FAILURE);
-        i++;
-    }
-    return (SUCCESS);
+	i = 0;
+	while (i < 4)
+	{
+		game->textures[i] = load_single_texture(default_paths[i]);
+		if (!game->textures[i])
+			return (FAILURE);
+		i++;
+	}
+	return (SUCCESS);
 }
 
-void    destroy_textures(t_game *game)
+void	destroy_textures(t_game *game)
 {
-    int i;
-    
+	int	i;
+
     i = 0;
-    while (i < 4)
-    {
-        if (game->textures[i])
-            mlx_delete_texture(game->textures[i]);
-        i++;
-    }
+	while (i < 4)
+	{
+		if (game->textures[i])
+			mlx_delete_texture(game->textures[i]);
+		i++;
+	}
 }

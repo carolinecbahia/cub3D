@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 13:50:05 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/10 17:42:53 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/13 13:25:10 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,9 @@ int	init_mlx(t_game *game)
 		ft_putstr_fd("Error\nImage to window failed\n", 2);
 		return (FAILURE);
 	}
-    if (load_all_textures(game) == FAILURE)
+	if (load_all_textures(game) == FAILURE)
 	{
 		mlx_terminate(game->mlx_ptr);
-        game->mlx_ptr = NULL;
 		return (FAILURE);
 	}
 	return (SUCCESS);

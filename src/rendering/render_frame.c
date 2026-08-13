@@ -6,13 +6,14 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 13:47:24 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/02 03:41:22 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/13 13:38:20 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static void	draw_square(t_game *game, int start_x, int start_y, int size, uint32_t color)
+static void	draw_square(t_game *game, int start_x,
+		int start_y, int size, uint32_t color)
 {
 	int	x;
 	int	y;
@@ -63,5 +64,5 @@ void	render_frame(t_game *game)
 {
 	render_background(game);
 	raycasting(game);
-	draw_debug_minimap(game); //tests
+	draw_debug_minimap(game);
 }
