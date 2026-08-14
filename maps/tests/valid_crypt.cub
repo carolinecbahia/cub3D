@@ -1,0 +1,15 @@
+NO ./textures/walls/crypt/no.png
+SO ./textures/walls/crypt/so.png
+WE ./textures/walls/crypt/we.png
+EA ./textures/walls/crypt/ea.png
+
+F 38,43,48
+C 18,25,36
+
+1111111111
+1000000001
+1011110101
+101N000101
+1010111101
+1000000001
+1111111111

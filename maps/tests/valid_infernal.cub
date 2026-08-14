@@ -1,0 +1,16 @@
+NO ./textures/walls/infernal/no.png
+SO ./textures/walls/infernal/so.png
+WE ./textures/walls/infernal/we.png
+EA ./textures/walls/infernal/ea.png
+
+F 48,18,8
+C 12,8,8
+
+11111111111
+10000000001
+10111111001
+10100001001
+1010S001001
+10101111001
+10000000001
+11111111111

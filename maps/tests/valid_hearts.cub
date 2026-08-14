@@ -1,0 +1,15 @@
+NO ./textures/walls/special/hearts.png
+SO ./textures/walls/special/hearts.png
+WE ./textures/walls/special/hearts.png
+EA ./textures/walls/special/hearts.png
+
+F 74,24,48
+C 28,8,30
+
+111111111
+100000001
+101111101
+1010W0101
+101000101
+100000001
+111111111

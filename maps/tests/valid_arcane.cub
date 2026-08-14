@@ -1,0 +1,16 @@
+NO ./textures/walls/arcane/no.png
+SO ./textures/walls/arcane/so.png
+WE ./textures/walls/arcane/we.png
+EA ./textures/walls/arcane/ea.png
+
+F 25,18,48
+C 8,15,38
+
+111111111111
+100000000001
+101111110101
+100000010001
+10110E011101
+100000000001
+101111111101
+111111111111
