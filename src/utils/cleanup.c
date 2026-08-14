@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:23:32 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/13 14:12:28 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/13 22:03:58 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	cleanup_map(t_map	*map, char **file_lines)
 	if (!map)
 		return ;
 	ft_free_matrix(map->grid);
-	free(map->map_path);
+	// free(map->map_path); DOUBLE FREE
 	i = 0;
 	while (i < 4)
 	{

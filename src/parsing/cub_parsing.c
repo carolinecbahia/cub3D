@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 13:40:36 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/13 14:13:32 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/13 22:15:48 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,10 @@ int	parse_file(char *filename, t_map *map)
 	char	**file_lines;
 
 	if (!validate_file(filename))
-		return (0);
+		return (FAILURE); //usar FAILURE
 	file_lines = read_lines(filename);
 	if (!file_lines)
-		return (0);
+		return (FAILURE); //usar FAILURE
 	if (!(parse_textures(file_lines, map)))
 	{
 		cleanup_map(map, file_lines);

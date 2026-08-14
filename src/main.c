@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:10:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/13 14:38:16 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/13 22:11:05 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
-#include "cub3D.h"
 #include <stdio.h>
+#include "cub3D.h"
 
 int	main(int argc, char **argv)
 {
@@ -27,10 +26,10 @@ int	main(int argc, char **argv)
 	printf("[1] Inicializando map...\n");
 	map = init_map(argv[1]);
 	printf("[2] Chamando parse_file...\n");
-	if (!parse_file(argv[1], &map))
+	if (parse_file(argv[1], &map) == FAILURE) //comparação tem que ser com FAILURE (-1), estava comparando com 0 e tava retornando erro sempre por SUCESS = 0
 	{
-		printf("[ERRO] parse_file falhou!\n");
-		return (1);
+	printf("[ERRO] parse_file falhou!\n");
+	return (1);
 	}
 	printf("[OK] parse_file terminou com sucesso!\n\n");
 	printf("=== MAP ===\n");
