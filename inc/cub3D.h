@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/13 13:23:10 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/15 01:38:22 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,65 +55,75 @@
 # define TEX_WE 2
 # define TEX_EA 3
 
+// Raycasting
+# define RAY_EPSILON 0.000001
+# define RAY_INFINITY 1e30
+
 /* ========================================================================
 ** FUNCTION PROTOTYPES
 ** ======================================================================== */
 
 /* Map Parsing and Validations */
-int		check_file_extension(char *filename, char *extension);
-int		open_file(char *filename);
-void	read_lines(void);
-int		validate_file(char *filename);
-void	parse_texture_line(char **lines);
-int		validate_texture_slot(char **slot, t_map *map, char dir);
-int		validate_texture_path(t_map *map);
-void	parse_color_line(char **lines);
-int		validate_rgb(t_map *map);
-int		validate_map(t_map *map);
-int		validate_map_content(t_map *map);
-int		validate_map_char(char c);
-int		validate_walls(t_map *map);
-void	find_player_pos(t_game *game, t_vectors *pos);
-int		check_map_borders(t_map *map);
-int		flood_fill(t_game *game, t_map *map);
-int		build_map_row(char **grid, int i, char *line, int width);
-void	find_player(t_map *map, int *px, int *py, char *dir);
+int			check_file_extension(char *filename, char *extension);
+int			open_file(char *filename);
+void		read_lines(void);
+int			validate_file(char *filename);
+void		parse_texture_line(char **lines);
+int			validate_texture_slot(char **slot, t_map *map, char dir);
+int			validate_texture_path(t_map *map);
+void		parse_color_line(char **lines);
+int			validate_rgb(t_map *map);
+int			validate_map(t_map *map);
+int			validate_map_content(t_map *map);
+int			validate_map_char(char c);
+int			validate_walls(t_map *map);
+void		find_player_pos(t_game *game, t_vectors *pos);
+int			check_map_borders(t_map *map);
+int			flood_fill(t_game *game, t_map *map);
+int			build_map_row(char **grid, int i, char *line, int width);
+void		find_player(t_map *map, int *px, int *py, char *dir);
 
 /* Inits */
-t_map	init_map(char *filename);
-int		init_mlx(t_game *game);
+t_map		init_map(char *filename);
+int			init_mlx(t_game *game);
 
 /* Rendering */
-void	put_pixel(t_game *game, int x, int y, uint32_t color);
-void	render_frame(t_game *game);
-void	render_background(t_game *game);
-int		load_all_textures(t_game *game);
-void	destroy_textures(t_game *game);
-void	draw_textured_column(t_game *game, t_ray *ray, int x);
+void		put_pixel(t_game *game, int x, int y, uint32_t color);
+void		render_frame(t_game *game);
+void		render_background(t_game *game);
+int			load_all_textures(t_game *game);
+void		destroy_textures(t_game *game);
+void		draw_textured_column(t_game *game, t_ray *ray, int x);
+int			select_texture(t_ray *ray);
+int			calculate_texture_x(t_game *game, t_ray *ray, int texture_index);
+uint32_t	sample_texture(mlx_texture_t *texture, int x,
+				double texture_pos, int side);
 
 /* Hooks*/
-void	close_key_hook(mlx_key_data_t key, void *param);
-void	close_window_hook(void *param);
-void	update_game(void *param);
-void	move_forward(t_game *game);
-void	move_backward(t_game *game);
-void	move_left(t_game *game);
-void	move_right(t_game *game);
-void	rotate_right(t_game *game);
-void	rotate_left(t_game *game);
-int		check_collision(t_game *game, double x, double y);
+void		close_key_hook(mlx_key_data_t key, void *param);
+void		close_window_hook(void *param);
+void		update_game(void *param);
+void		move_forward(t_game *game);
+void		move_backward(t_game *game);
+void		move_left(t_game *game);
+void		move_right(t_game *game);
+void		rotate_right(t_game *game);
+void		rotate_left(t_game *game);
+int			check_collision(t_game *game, double x, double y);
 
 /* Raycasting*/
-void	raycasting(t_game *game);
-void	init_step_side(t_game *game, t_ray *ray);
-void	init_ray(t_game *game, t_ray *ray, int x);
-void	perform_dda(t_game *game, t_ray *ray);
+void		raycasting(t_game *game);
+void		init_step_side(t_game *game, t_ray *ray);
+void		init_ray(t_game *game, t_ray *ray, int x);
+int			perform_dda(t_game *game, t_ray *ray);
+void		init_delta_distance(t_ray *ray);
+void		calculate_perp_distance(t_ray *ray);
 
 /* Utility functions */
-char	**create_grid(t_map *map);
-char	**dup_grid(t_map *map);
-void	ft_err(char *msg);
-int		return_error(char *msg, int err);
-void	ft_free_matrix(char **matrix);
+char		**create_grid(t_map *map);
+char		**dup_grid(t_map *map);
+void		ft_err(char *msg);
+int			return_error(char *msg, int err);
+void		ft_free_matrix(char **matrix);
 
 #endif

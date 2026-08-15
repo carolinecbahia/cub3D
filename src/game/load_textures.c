@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 16:34:37 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/14 23:00:24 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/15 01:41:29 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ static mlx_texture_t	*load_single_texture(char *path)
 
 int	load_all_textures(t_game *game)
 {
-    int i;
+	int	i;
 
+	if (!game)
+		return (FAILURE);
 	i = 0;
 	while (i < 4)
 	{
@@ -48,11 +50,16 @@ void	destroy_textures(t_game *game)
 {
 	int	i;
 
-    i = 0;
+	if (!game)
+		return ;
+	i = 0;
 	while (i < 4)
 	{
 		if (game->textures[i])
+		{
 			mlx_delete_texture(game->textures[i]);
+			game->textures[i] = NULL;
+		}
 		i++;
 	}
 }

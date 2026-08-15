@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 16:00:56 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/02 03:47:54 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/15 01:19:36 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,14 @@ void	init_step_side(t_game *game, t_ray *ray)
 
 void	init_ray(t_game *game, t_ray *ray, int x)
 {
-	ray->camera_x = 2 * x / (double)WIDTH - 1;
-	ray->raydir_x = game->player.dir_x + game->player.plane_x * ray->camera_x;
-	ray->raydir_y = game->player.dir_y + game->player.plane_y * ray->camera_x;
+	ray->camera_x = 2.0 * x / (double)WIDTH - 1.0;
+	ray->raydir_x = game->player.dir_x
+		+ game->player.plane_x * ray->camera_x;
+	ray->raydir_y = game->player.dir_y
+		+ game->player.plane_y * ray->camera_x;
 	ray->map_x = (int)game->player.pos_x;
 	ray->map_y = (int)game->player.pos_y;
-	if (ray->raydir_x == 0)
-		ray->delta_dist_x = 1e30;
-	else
-		ray->delta_dist_x = fabs(1 / ray->raydir_x);
-	if (ray->raydir_y == 0)
-		ray->delta_dist_y = 1e30;
-	else
-		ray->delta_dist_y = fabs(1 / ray->raydir_y);
+	ray->hit = FALSE;
+	ray->side = 0;
+	ray->perp_wall_dist = 0.0;
 }

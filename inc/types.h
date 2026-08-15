@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:00 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/14 23:03:43 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/15 01:31:28 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,17 @@ typedef struct s_game
 	mlx_image_t		*screen;
 	int				running;
 }	t_game;
+
+typedef struct s_column
+{
+	int		screen_x;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	int		texture_index;
+	int		texture_x;
+	double	step;
+	double	texture_pos;
+}	t_column;
 
 #endif
