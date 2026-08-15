@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/01 13:50:05 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 01:43:09 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/15 02:07:14 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	init_image(t_game *game)
 	if (!game->screen)
 		return (mlx_failure(game, "Error\nImage creation failed\n"));
 	if (mlx_image_to_window(game->mlx_ptr, game->screen, 0, 0) < 0)
-		return (mlx_failure(game, "Error/nImage to window failed\n"));
+		return (mlx_failure(game, "Error\nImage to window failed\n"));
 	if (load_all_textures(game) == FAILURE)
 		return (mlx_failure(game, NULL));
 	return (SUCCESS);

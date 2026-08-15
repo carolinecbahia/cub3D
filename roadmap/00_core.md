@@ -239,11 +239,11 @@ cub3D.h
 
 ## Checklist
 
-* [ ] t_game
-* [ ] t_map
-* [ ] t_player
-* [ ] t_texture
-* [ ] t_ray
+* [x] t_game
+* [x] t_map
+* [x] t_player
+* [x] t_texture
+* [x] t_ray
 
 ---
 
@@ -296,7 +296,7 @@ retornar game
 ## Funções
 
 * [ ] init_game()
-* [ ] init_map()
+* [x] init_map()
 * [ ] init_player()
 * [ ] init_textures()
 
@@ -349,7 +349,7 @@ Centralizar todas as mensagens de erro.
 
 ## Funções
 
-* [ ] error()
+* [x] error()
 * [ ] error_exit()
 * [ ] print_error()
 
@@ -559,7 +559,7 @@ utils/
 ## Inicialização
 
 * [ ] init_game()
-* [ ] init_map()
+* [x] init_map()
 * [ ] init_player()
 * [ ] init_textures()
 

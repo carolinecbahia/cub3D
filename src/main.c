@@ -6,101 +6,57 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:10:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 01:46:38 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/15 02:19:20 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-# define MOCK_THEME "textures/walls/arcane/"
-
-static void	free_fake_game(t_game *game)
+static int	init_game_data(t_game *game, char *filename)
 {
-	if (!game)
-		return ;
-	destroy_textures(game);
-	if (game->mlx_ptr)
+	game->map = init_map(filename);
+	if (!game->map.map_path)
+		return (FAILURE);
+	if (parse_file(filename, &game->map) == FAILURE)
+		return (FAILURE);
+	if (init_player(game) == FAILURE)
 	{
-		mlx_terminate(game->mlx_ptr);
-		game->mlx_ptr = NULL;
+		cleanup_map(&game->map, NULL);
+		return (FAILURE);
 	}
-	ft_free_matrix(game->map.grid);
-	game->map.grid = NULL;
-	free(game);
-}
-
-static int	init_mock_grid(t_game *game)
-{
-	game->map.grid = ft_calloc(6, sizeof(char *));
-	if (!game->map.grid)
-		return (FAILURE);
-	game->map.grid[0] = ft_strdup("11111");
-	game->map.grid[1] = ft_strdup("10101");
-	game->map.grid[2] = ft_strdup("10001");
-	game->map.grid[3] = ft_strdup("11001");
-	game->map.grid[4] = ft_strdup("11111");
-	if (!game->map.grid[0] || !game->map.grid[1]
-		|| !game->map.grid[2] || !game->map.grid[3]
-		|| !game->map.grid[4])
-		return (FAILURE);
-	game->map.width = 5;
-	game->map.height = 5;
+	game->running = TRUE;
 	return (SUCCESS);
 }
 
-static void	init_mock_player(t_game *game)
+static void	run_game(t_game *game)
 {
-	game->player.pos_x = 2.5;
-	game->player.pos_y = 2.5;
-	game->player.dir_x = 0.0;
-	game->player.dir_y = -1.0;
-	game->player.plane_x = 0.66;
-	game->player.plane_y = 0.0;
-	game->player.mov_speed = 0.08;
-	game->player.rot_speed = 0.05;
-}
-
-static void	init_mock_textures(t_game *game)
-{
-	game->map.textures_path[TEX_NO] = MOCK_THEME "no.png";
-	game->map.textures_path[TEX_SO] = MOCK_THEME "so.png";
-	game->map.textures_path[TEX_WE] = MOCK_THEME "we.png";
-	game->map.textures_path[TEX_EA] = MOCK_THEME "ea.png";
-}
-
-static int	init_mock(t_game *game)
-{
-	if (init_mock_grid(game) == FAILURE)
-		return (FAILURE);
-	init_mock_player(game);
-	init_mock_textures(game);
-	game->map.ceiling_color = 0x3388FFFF;
-	game->map.floor_color = 0x553311FF;
-	return (SUCCESS);
-}
-
-int	main(void)
-{
-	t_game	*game;
-
-	game = ft_calloc(1, sizeof(t_game));
-	if (!game)
-		return (1);
-	if (init_mock(game) == FAILURE)
-	{
-		free_fake_game(game);
-		return (1);
-	}
-	if (init_mlx(game) == FAILURE)
-	{
-		free_fake_game(game);
-		return (1);
-	}
 	render_frame(game);
 	mlx_key_hook(game->mlx_ptr, close_key_hook, game);
 	mlx_close_hook(game->mlx_ptr, close_window_hook, game);
 	mlx_loop_hook(game->mlx_ptr, update_game, game);
 	mlx_loop(game->mlx_ptr);
-	free_fake_game(game);
+}
+
+int	main(int argc, char **argv)
+{
+	t_game	*game;
+
+	if (argc != 2)
+		return (return_error("Usage: ./cub3D <map.cub>\n", 1));
+	game = ft_calloc(1, sizeof(t_game));
+	if (!game)
+		return (return_error("Error\nAllocation failed\n", 1));
+	if (init_game_data(game, argv[1]) == FAILURE)
+	{
+		free(game);
+		return (1);
+	}
+	if (init_mlx(game) == FAILURE)
+	{
+		destroy_game(game);
+		return (1);
+	}
+	run_game(game);
+	destroy_game(game);
 	return (0);
 }
