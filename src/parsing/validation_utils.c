@@ -6,11 +6,24 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:30:15 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 13:22:19 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/15 14:23:57 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+int	validate_file(char *filename)
+{
+	int		fd;
+
+	if (!check_file_extension(filename, ".cub"))
+		return (0);
+	fd = open_file(filename);
+	if (fd == -1)
+		return (0);
+	close(fd);
+	return (1);
+}
 
 int	check_all_textures(t_map *map)
 {

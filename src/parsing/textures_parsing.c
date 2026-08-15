@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:53:48 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 13:21:48 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/15 15:02:48 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static int	valid_texture_path(char *path)
 {
 	int	fd;
 
-	if (!check_file_extension(path, ".png"))
+	if (!check_file_extension(path, ".png")
+		&& !check_file_extension(path, ".xpm42"))
 		return (0);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
