@@ -76,15 +76,43 @@ OK			= ✓
 ARROW		= ➜
 
 # ============================================================================
+# DEBUG HELP
+# ============================================================================
+
+define GDB_HELP
+
+$(CYAN)GDB Quick Reference$(RESET)
+  make gdb MAP=maps/tests/valid_basic.cub
+                                Compila e inicia no GDB
+  run                           Executa o programa
+  break main                    Breakpoint na main
+  break <funcao>                Breakpoint em uma funcao
+  next                          Proxima linha, sem entrar na funcao
+  step                          Proxima linha, entrando na funcao
+  continue                      Continua a execucao
+  print <variavel>              Mostra uma variavel
+  display <variavel>            Mostra a variavel em cada parada
+  backtrace                     Mostra a pilha de chamadas
+  info locals                   Mostra as variaveis locais
+  info breakpoints              Lista os breakpoints
+  delete <numero>               Remove um breakpoint
+  quit                          Sai do GDB
+
+$(YELLOW)Dicas cub3D:$(RESET)
+  print game->player
+  print game->map
+  print ray
+  print *game
+  backtrace
+
+endef
+export GDB_HELP
+
+# ============================================================================
 # SOURCES
 # ============================================================================
 
 CORE_SRC = \
-	src/parsing/map_utils.c \
-	src/parsing/grid_utils.c \
-	src/parsing/map_building.c \
-	src/parsing/map_parsing.c \
-	src/parsing/parsing_utils.c \
 	src/utils/cleanup.c \
 	src/utils/errors.c \
 	src/utils/math_utils.c \
@@ -97,9 +125,13 @@ CORE_SRC = \
 MANDATORY_SRC = \
 	src/main.c \
 	src/parsing/color_parsing.c \
-	src/parsing/textures_parsing.c \
+	src/parsing/cub_parsing.c \
+	src/parsing/grid_utils.c \
+	src/parsing/map_parsing.c \
+	src/parsing/map_utils.c \
 	src/parsing/map_validation.c \
-	src/parsing/path_validation.c \
+	src/parsing/parsing_utils.c \
+	src/parsing/textures_parsing.c \
 	src/parsing/validation_utils.c \
 	src/game/init_game.c \
 	src/game/load_textures.c \
@@ -117,7 +149,7 @@ MANDATORY_SRC = \
 	src/hooks/movement.c \
 	src/hooks/rotation.c \
 	src/hooks/update_hook.c \
-	src/hooks/collision.c
+	src/hooks/collision.c 
 
 BONUS_SRC = \
 	src_bonus/main_bonus.c \
@@ -146,6 +178,7 @@ DEPS_BONUS	= $(OBJS_BONUS:.o=.d)
 
 .PHONY: all bonus clean fclean re debug release \
 run run_bonus valgrind valgrind_bonus \
+gdb gdb_bonus gdb_help \
 maps_test norm help banner
 
 all: banner $(MLX42_A) $(NAME)
@@ -192,8 +225,10 @@ $(OBJ_DIR)%.o: %.c
 # BUILD MODES
 # ============================================================================
 
-debug: CFLAGS += $(DEBUG_FLAGS)
-debug: clean all
+debug:
+	@$(MAKE) clean
+	@$(MAKE) CFLAGS="$(CFLAGS) $(DEBUG_FLAGS)" all
+	@printf '%b\n' "$$GDB_HELP"
 
 release: CFLAGS += $(OPT_FLAGS)
 release: clean all
@@ -222,6 +257,19 @@ valgrind: debug
 
 valgrind_bonus: debug bonus
 	@$(VAL_CMD) ./$(BONUS_NAME) $(MAP) $(ARGS)
+
+# ============================================================================
+# GDB
+# ============================================================================
+
+gdb: debug
+	@gdb --args ./$(NAME) $(MAP) $(ARGS)
+
+gdb_bonus: debug bonus
+	@gdb --args ./$(BONUS_NAME) $(MAP) $(ARGS)
+
+gdb_help:
+	@printf '%s\n' "$$GDB_HELP"
 
 # ============================================================================
 # MAP TEST LOOP
@@ -264,6 +312,9 @@ help:
 	@echo "make valgrind_bonus"
 	@echo "make maps_test"
 	@echo "make debug"
+	@echo "make gdb MAP=maps/a.cub"
+	@echo "make gdb_bonus MAP=maps/a.cub"
+	@echo "make gdb_help"
 	@echo "make release"
 	@echo "make clean / fclean / re"
 

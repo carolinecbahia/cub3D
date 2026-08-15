@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 01:25:37 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 01:29:57 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/15 02:23:53 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	select_texture(t_ray *ray)
 		return (FAILURE);
 	if (ray->side == 0)
 	{
-		if (ray->raydir_x > 0)
+		if (ray->raydir_x < 0)
 			return (TEX_WE);
 		return (TEX_EA);
 	}
-	if (ray->raydir_y > 0)
+	if (ray->raydir_y < 0)
 		return (TEX_NO);
 	return (TEX_SO);
 }

@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:23:32 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/01 14:29:18 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/15 02:12:13 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,25 @@ void	ft_free_matrix(char **matrix)
 		i++;
 	}
 	free(matrix);
+}
+
+void	cleanup_map(t_map *map, char **file_lines)
+{
+	int	i;
+
+	if (file_lines)
+		ft_free_matrix(file_lines);
+	if (!map)
+		return ;
+	ft_free_matrix(map->grid);
+	map->grid = NULL;
+	free(map->map_path);
+	map->map_path = NULL;
+	i = 0;
+	while (i < 4)
+	{
+		free(map->textures_path[i]);
+		map->textures_path[i] = NULL;
+		i++;
+	}
 }
