@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 17:43:34 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/13 13:02:37 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/15 13:25:08 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ int	read_map_size(char **file_lines, int start, t_map *map)
 	while (file_lines[i])
 	{
 		if (is_empty_line(file_lines[i]))
-			return (return_error("Empty line in map\n", 0));
+			return (return_error("╰┈➤ Empty line in map! 🗺️\n", 0));
 		if (!(is_map_line(file_lines[i])))
-			return (return_error("Invalid map\n", 0));
+			return (return_error("╰┈➤ Invalid map! 🗺️\n", 0));
 		line_width = ft_strlen(file_lines[i]);
 		if (width < line_width)
 			width = line_width;

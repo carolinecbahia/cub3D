@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 02:16:42 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/15 13:58:41 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,35 +64,35 @@
 ** ======================================================================== */
 
 /* Map Parsing and Validations */
-char	**read_lines(char *filename);
-int		parse_texture_line(char *line, t_map *map);
-int		valid_texture_line(char *line, char dir);
-int		check_all_textures(t_map *map);
-int		find_colors(char *line, char type);
-int		parse_color_line(char *line, t_map *map);
-int		parse_rgb(char *rgb_str, int *r, int *g, int *b);
-int		check_all_colors(t_map *map);
-int		count_lines(int fd);
-int		is_map_line(char *line);
-int		is_empty_line(char *line);
-int		has_open_neighbor(t_map *map, int i, int j);
-int		validate_borders(t_map *map);
-int		read_map_size(char **file_lines, int start, t_map *map);
-int		find_map_start(char **file_lines);
-int		fill_map_grid(char **file_lines, int start, t_map *map);
-int		is_player(char c);
-int		parse_file(char *filename, t_map *map);
-void	cleanup_map(t_map *map, char **file_lines);
-int		parse_textures(char **file_lines, t_map *map);
-int		parse_colors(char **file_lines, t_map *map);
-int		parse_map(char **file_lines, t_map *map);
-int	validate_file(char *filename);
-int	validate_map_content(t_map *map);
+char		**read_lines(char *filename);
+int			parse_texture_line(char *line, t_map *map);
+int			valid_texture_line(char *line, char dir);
+int			check_all_textures(t_map *map);
+int			find_colors(char *line, char type);
+int			parse_color_line(char *line, t_map *map);
+int			parse_rgb(char *rgb_str, int *r, int *g, int *b);
+int			check_all_colors(t_map *map);
+int			count_lines(int fd);
+int			is_map_line(char *line);
+int			is_empty_line(char *line);
+int			has_open_neighbor(t_map *map, int i, int j);
+int			validate_borders(t_map *map);
+int			read_map_size(char **file_lines, int start, t_map *map);
+int			find_map_start(char **file_lines);
+int			fill_map_grid(char **file_lines, int start, t_map *map);
+int			is_player(char c);
+int			parse_file(char *filename, t_map *map);
+void		cleanup_map(t_map *map, char **file_lines);
+int			parse_textures(char **file_lines, t_map *map);
+int			parse_colors(char **file_lines, t_map *map);
+int			parse_map(char **file_lines, t_map *map);
+int			validate_file(char *filename);
+int			validate_map_content(t_map *map);
 
 /* Inits */
 t_map		init_map(char *filename);
 int			init_mlx(t_game *game);
-int	init_player(t_game *game);
+int			init_player(t_game *game);
 
 /* Rendering */
 void		put_pixel(t_game *game, int x, int y, uint32_t color);
@@ -125,17 +125,17 @@ void		init_ray(t_game *game, t_ray *ray, int x);
 int			perform_dda(t_game *game, t_ray *ray);
 void		init_delta_distance(t_ray *ray);
 void		calculate_perp_distance(t_ray *ray);
-int	check_file_extension(char *filename, char *extension);
-int	open_file(char *filename);
-int	validate_map_char(char c);
-int	find_player(t_map *map, int *px, int *py, char *dir);
+int			check_file_extension(char *filename, char *extension);
+int			open_file(char *filename);
+int			validate_map_char(char c);
+int			find_player(t_map *map, int *px, int *py, char *dir);
 
 /* Utility functions */
-int	create_grid(t_map *map);
+int			create_grid(t_map *map);
 char		**dup_grid(t_map *map);
 void		ft_err(char *msg);
 int			return_error(char *msg, int err);
 void		ft_free_matrix(char **matrix);
-void	destroy_game(t_game *game);
+void		destroy_game(t_game *game);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:55:18 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 02:20:55 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/15 13:24:58 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	find_map_start(char **file_lines)
 		if (is_map_line(file_lines[i]))
 			return (i);
 		else
-			return (return_error("Map line is invalid\n", -1));
+			return (return_error("╰┈➤ Map line is invalid!\n", -1));
 	}
-	return (return_error("Map not found in archive\n", -1));
+	return (return_error("╰┈➤ Map not found in archive!\n", -1));
 }
 
 int	create_grid(t_map *map)
@@ -44,7 +44,7 @@ int	create_grid(t_map *map)
 
 	grid = ft_calloc(map->height + 1, sizeof(char *));
 	if (!grid)
-		return (return_error("Malloc failed\n", 0));
+		return (return_error("╰┈➤ Malloc failed!\n", 0));
 	i = 0;
 	while (i < map->height)
 	{
@@ -52,7 +52,7 @@ int	create_grid(t_map *map)
 		if (!grid[i])
 		{
 			ft_free_matrix(grid);
-			return (return_error("Malloc failed\n", 0));
+			return (return_error("╰┈➤ Malloc failed!\n", 0));
 		}
 		i++;
 	}
@@ -100,7 +100,7 @@ int	find_player(t_map *map, int *px, int *py, char *dir)
 			if (is_player(map->grid[i][j]))
 			{
 				if (*dir != 0)
-					return (return_error("Too many players\n", 0));
+					return (return_error("╰┈➤ Too many players! 🕹️\n", 0));
 				*px = j;
 				*py = i;
 				*dir = map->grid[i][j];
@@ -110,7 +110,7 @@ int	find_player(t_map *map, int *px, int *py, char *dir)
 		i++;
 	}
 	if (*dir == 0)
-		return (return_error("Player not found\n", 0));
+		return (return_error("╰┈➤ Player not found! 🕹️\n", 0));
 	map->grid[*py][*px] = EMPTY;
 	return (1);
 }

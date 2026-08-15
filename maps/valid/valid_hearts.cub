@@ -3,8 +3,8 @@ SO ./textures/walls/special/hearts.png
 WE ./textures/walls/special/hearts.png
 EA ./textures/walls/special/hearts.png
 
-F 74,24,48
-C 28,8,30
+F 255,182,193
+C 173,216,230
 
 111111111
 100000001

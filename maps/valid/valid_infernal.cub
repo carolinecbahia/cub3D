@@ -3,8 +3,8 @@ SO ./textures/walls/infernal/so.png
 WE ./textures/walls/infernal/we.png
 EA ./textures/walls/infernal/ea.png
 
-F 48,18,8
-C 12,8,8
+F 60,10,10
+C 100,20,20
 
 11111111111
 10000000001

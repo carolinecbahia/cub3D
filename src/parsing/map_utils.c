@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 22:08:02 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/13 15:52:33 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/15 13:24:28 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	open_file(char *filename)
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
 	{
-		return_error("File not opened!\n", -1);
+		return_error("╰┈➤ Failed to open file!\n", -1);
 	}
 	return (fd);
 }

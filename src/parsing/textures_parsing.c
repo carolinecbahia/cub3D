@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:53:48 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/13 13:51:44 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/15 13:21:48 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ static int	save_texture(char **slot, char *path)
 	{
 		*slot = ft_strdup(path);
 		if (!*slot)
-			return (return_error("Malloc failed\n", 0));
+			return (return_error("╰┈➤ Failed to save texture!\n", 0));
 		return (1);
 	}
-	return (return_error("Duplicated texture\n", 0));
+	return (return_error("╰┈➤ Duplicated texture!\n", 0));
 }
 
 int	parse_texture_line(char *line, t_map *map)
@@ -70,9 +70,9 @@ int	parse_texture_line(char *line, t_map *map)
 
 	path = extract_texture_path(line);
 	if (path == NULL)
-		return (return_error("Path not found\n", 0));
+		return (return_error("╰┈➤ Path not found!\n", 0));
 	if (!valid_texture_path(path))
-		return (return_error("Invalid path\n", 0));
+		return (return_error("╰┈➤ Invalid path! \n", 0));
 	if (valid_texture_line(line, 'N'))
 		return (save_texture(&map->textures_path[TEX_NO], path));
 	if (valid_texture_line(line, 'S'))
@@ -81,5 +81,5 @@ int	parse_texture_line(char *line, t_map *map)
 		return (save_texture(&map->textures_path[TEX_WE], path));
 	if (valid_texture_line(line, 'E'))
 		return (save_texture(&map->textures_path[TEX_EA], path));
-	return (return_error("Invalid texture identifier\n", 0));
+	return (return_error("╰┈➤ Invalid texture identifier! 🧱\n", 0));
 }
