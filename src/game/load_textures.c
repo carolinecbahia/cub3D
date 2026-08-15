@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 16:34:37 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/14 02:10:26 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/14 23:00:24 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ static mlx_texture_t	*load_single_texture(char *path)
 
 int	load_all_textures(t_game *game)
 {
-    char    *default_paths[4] = {"textures/walls/arcane/ea.png",
-    "textures/walls/arcane/no.png", "textures/walls/arcane/so.png",
-    "textures/walls/arcane/we.png"};
     int i;
 
 	i = 0;
 	while (i < 4)
 	{
-		game->textures[i] = load_single_texture(default_paths[i]);
+		game->textures[i] = load_single_texture(game->map.textures_path[i]);
 		if (!game->textures[i])
 			return (FAILURE);
 		i++;

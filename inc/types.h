@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:00 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/13 13:23:57 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/14 23:03:43 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ typedef struct s_map
 	int		width;
 	int		height;
 	char	*map_path;
-	char	textures_path[4];
+	char	*textures_path[4];
 	int		floor_color;
 	int		ceiling_color;
 	int		player_x;

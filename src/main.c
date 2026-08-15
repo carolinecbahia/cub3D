@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:10:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/10 17:42:33 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/14 02:12:39 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static void	free_fake_game(t_game *game)
 
 void	init_mock_player_and_map(t_game *game)
 {
+	
+	game = ft_calloc(1, sizeof(t_game));
 	game->map.grid = malloc(sizeof(char *) * 6);
 	game->map.grid[0] = ft_strdup("11111");
 	game->map.grid[1] = ft_strdup("10101");
