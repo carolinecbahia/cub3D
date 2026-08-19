@@ -8,7 +8,7 @@
 
 NAME		= cub3D
 BONUS_NAME	= cub3D_bonus
-CC			= gcc
+CC			= cc
 
 # ============================================================================
 # DIRECTORIES
@@ -175,13 +175,31 @@ ARGS	?=
 INVALID_MAPS = \
 	maps/invalid/bad_extension.txt \
 	maps/invalid/bad_rgb.cub \
+	maps/invalid/corner_leak.cub \
 	maps/invalid/double_player.cub \
+	maps/invalid/duplicate_color.cub \
 	maps/invalid/duplicate_texture.cub \
+	maps/invalid/empty.cub \
+	maps/invalid/info_after_map.cub \
+	maps/invalid/internal_space_leak.cub \
 	maps/invalid/invalid_char.cub \
+	maps/invalid/invalid_identifier.cub \
+	maps/invalid/missing_color.cub \
 	maps/invalid/missing_texture.cub \
 	maps/invalid/newline_in_map.cub \
+	maps/invalid/no_player.cub \
+	maps/invalid/open_east.cub \
+	maps/invalid/open_north.cub \
+	maps/invalid/open_south.cub \
 	maps/invalid/open_wall.cub \
-	maps/invalid/space_leak.cub
+	maps/invalid/open_west.cub \
+	maps/invalid/rgb_empty_component.cub \
+	maps/invalid/rgb_extra_component.cub \
+	maps/invalid/rgb_letters.cub \
+	maps/invalid/rgb_missing_component.cub \
+	maps/invalid/rgb_overflow.cub \
+	maps/invalid/space_leak.cub \
+	maps/invalid/tab_in_map.cub
 
 # ----------------------------------------------------------------------------
 # Colors
