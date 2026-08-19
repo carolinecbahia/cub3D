@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:51:57 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 15:49:43 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/19 16:18:51 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,35 +38,11 @@ int	validate_borders(t_map	*map)
 	return (1);
 }
 
-static int	flood_fill_recursive(char **grid, int **visited,
-	int height, int width, int y, int x)
-{
-	if (y < 0 || y >= height || x < 0 || x >= width)
-		return (0);
-	if (visited[y][x])
-		return (1);
-	if (grid[y][x] == '1')
-		return (1);
-	if (grid[y][x] == ' ' || grid[y][x] == '\0')
-		return (0);
-	if (grid[y][x] != EMPTY && !is_player(grid[y][x]))
-		return (1);
-	visited[y][x] = 1;
-	if (!flood_fill_recursive(grid, visited, height, width, y - 1, x))
-		return (0);
-	if (!flood_fill_recursive(grid, visited, height, width, y + 1, x))
-		return (0);
-	if (!flood_fill_recursive(grid, visited, height, width, y, x - 1))
-		return (0);
-	if (!flood_fill_recursive(grid, visited, height, width, y, x + 1))
-		return (0);
-	return (1);
-}
-
 int	flood_fill(t_map *map, int start_y, int start_x)
 {
 	int	**visited;
 	int	i;
+	int	result;
 
 	if (!map || !map->grid)
 		return (0);
@@ -78,23 +54,11 @@ int	flood_fill(t_map *map, int start_y, int start_x)
 	{
 		visited[i] = ft_calloc(map->width, sizeof(int));
 		if (!visited[i])
-			return (0);
+			return (free_visited(visited, i, FALSE));
 		i++;
 	}
-	if (!flood_fill_recursive(map->grid, visited, map->height,
-			map->width, start_y, start_x))
-	{
-		i = 0;
-		while (i < map->height)
-			free(visited[i++]);
-		free(visited);
-		return (0);
-	}
-	i = 0;
-	while (i < map->height)
-		free(visited[i++]);
-	free(visited);
-	return (1);
+	result = flood_fill_iterative(map, visited, start_y, start_x);
+	return (free_visited(visited, map->height, result));
 }
 
 int	validate_map_content(t_map *map)

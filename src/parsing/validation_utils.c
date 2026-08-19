@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:30:15 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 14:23:57 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/19 16:19:40 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	validate_file(char *filename)
 	int		fd;
 
 	if (!check_file_extension(filename, ".cub"))
-		return (0);
+		return (return_error("╰┈➤ Wrong texture extension!\n", 0));
 	fd = open_file(filename);
 	if (fd == -1)
 		return (0);
@@ -54,8 +54,8 @@ int	check_file_extension(char *filename, char *extension)
 	len = ft_strlen(filename);
 	ext_len = ft_strlen(extension);
 	if (len < ext_len)
-		return (return_error("╰┈➤ Wrong file extension!\n", 0));
+		return (0);
 	if (ft_strcmp(filename + len - ext_len, extension) != 0)
-		return (return_error("╰┈➤ Wrong file extension!\n", 0));
+		return (0);
 	return (1);
 }

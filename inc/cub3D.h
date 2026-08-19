@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/19 14:04:50 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/19 16:16:59 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,9 @@ int			parse_colors(char **file_lines, t_map *map);
 int			parse_map(char **file_lines, t_map *map);
 int			validate_file(char *filename);
 int			validate_map_content(t_map *map);
+int			free_visited(int **visited, int height, int result);
+int			flood_fill_iterative(t_map *map, int **visited, int y, int x);
+int			flood_fill(t_map *map, int start_y, int start_x);
 
 /* Inits */
 t_map		init_map(char *filename);

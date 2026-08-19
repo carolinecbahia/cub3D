@@ -66,6 +66,7 @@ MANDATORY_SRC = \
 	src/main.c \
 	src/parsing/color_parsing.c \
 	src/parsing/cub_parsing.c \
+	src/parsing/flood_fill_utils.c \
 	src/parsing/grid_utils.c \
 	src/parsing/map_parsing.c \
 	src/parsing/map_utils.c \
