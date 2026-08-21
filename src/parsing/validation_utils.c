@@ -6,12 +6,27 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:30:15 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/19 16:19:40 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/21 01:57:23 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+int	is_valid_number(char *str)
+{
+	int	i;
+
+	if (!str || !str[0])
+		return (0);
+	i = 0;
+	while(str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
 int	validate_file(char *filename)
 {
 	int		fd;

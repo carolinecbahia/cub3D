@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 22:48:30 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 13:22:34 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/21 01:55:18 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ int	parse_rgb(char *rgb_str, int *r, int *g, int *b)
 	while (rgb_values[i])
 		i++;
 	if (i != 3)
+	{
+		ft_free_matrix(rgb_values);
+		return (return_error("╰┈➤ Invalid RGB format!\n", 0));
+	}
+	if (!is_valid_number(rgb_values[0]) || !is_valid_number(rgb_values[1])
+		|| !is_valid_number(rgb_values[2]))
 	{
 		ft_free_matrix(rgb_values);
 		return (return_error("╰┈➤ Invalid RGB format!\n", 0));
