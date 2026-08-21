@@ -1,254 +1,222 @@
+*This project has been created as part of the 42 curriculum by ccavalca and anunes-o.*
 
-# Cub3D - Raycasting 3D Engine
+# cub3D
 
-> A mini 3D graphics engine in C, using **MLX42** (MiniLibX) for real-time rendering. Developed as part of the **42 School** curriculum to master graphics programming, parsing, raycasting, and game architecture.
+A first-person 3D maze renderer written in C with MLX42.
 
-[![Language](https://img.shields.io/badge/language-C-blue.svg)]()
-[![Graphics](https://img.shields.io/badge/graphics-MLX42-purple.svg)]()
-[![Project](https://img.shields.io/badge/project-Cub3D-orange.svg)]()
-<!-- [![Status](https://img.shields.io/badge/status-fully%20functional-success.svg)]() -->
+## Description
 
-## 📋 Table of Contents
+`cub3D` is inspired by the ray-casting engines used by early first-person games such as *Wolfenstein 3D*. It renders a three-dimensional view from a two-dimensional map by casting one ray for each vertical screen column.
 
-- [Overview](#overview)
-- [Mechanics](#mechanics)
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Architecture](#architecture)
-- [Controls](#controls)
-- [Testing](#testing)
-- [Technical Highlights](#technical-highlights)
-- [Author](#author)
+The project combines file parsing, map validation, vector mathematics, DDA ray traversal, texture sampling, collision detection, event handling, and careful resource cleanup.
 
-## 🎮 Overview
+The mandatory implementation includes:
 
-**Cub3D** is a "raycasting" project that simulates a 3D environment from 2D maps, inspired by the classic Wolfenstein 3D. The goal is to explore a maze rendered in real time, with free movement and first-person view.
+- `.cub` scene parsing and validation;
+- four directional wall textures: north, south, west, and east;
+- configurable floor and ceiling RGB colors;
+- exactly one player with an initial `N`, `S`, `E`, or `W` orientation;
+- closed-map validation using flood fill and boundary checks;
+- DDA-based ray casting with perpendicular-distance correction;
+- textured wall rendering;
+- first-person movement and camera rotation;
+- wall collision;
+- clean window shutdown through `ESC` or the window close button.
 
-**Key achievements:**
-- ✅ 3D rendering based on raycasting
-- ✅ Robust .cub map parsing
-- ✅ Wall and floor texturing
-- ✅ Smooth camera and movement control
-- ✅ No memory leaks
+## Instructions
 
-## 🕹️ Mechanics
+### Requirements
 
-### Gameplay
-1. **Goal:** Navigate the map, exploring the 3D environment
-2. **Controls:** WASD to move, arrows to rotate
-3. **Win condition:** Free exploration (can be expanded)
-4. **Error conditions:** Invalid map, wall collision
+The project targets Linux and requires:
 
-### Game Elements
-- **Player:** Initial position defined in the map
-- **Walls:** Defined by '1' in the map
-- **Free space:** '0' in the map
-- **Textures:** XPM files for walls, floor, ceiling
-- **Map:** .cub file, rectangular, surrounded by walls
+- a C compiler;
+- GNU Make;
+- CMake;
+- GLFW and OpenGL development libraries;
+- X11 development libraries.
 
-### Game Loop
-```
-Initialize engine
-   ↓
-Load and validate map
-   ↓
-Load textures
-   ↓
-[Main Loop - 60 FPS]
-   ├─ Read keyboard input
-   ├─ Update position/camera
-   ├─ Raycasting and rendering
-   └─ Check collisions
-   ↓
-Free resources and exit
-```
-
-## ✨ Features
-
-### Mandatory
-- ✅ **3D rendering** via raycasting
-- ✅ **.cub map parsing**
-- ✅ **Wall textures**
-- ✅ **Player movement and rotation**
-- ✅ **Minimap** (if implemented)
-- ✅ **Map validation**
-- ✅ **Clean exit** (ESC or close window)
-
-### Bonus (if implemented)
-- ✅ Doors, sprites, HUD
-- ✅ Lighting effects
-- ✅ Sounds
-- ✅ Mouse look
-
-## 📦 Requirements
-
-- **OS:** Linux (with X11 support)
-- **Compiler:** GCC/Clang with `-Wall -Wextra -Werror`
-- **C Standard:** C99+
-- **Libraries:**
-  - MLX42 (MiniLibX)
-  - Custom libft
-- **Dependencies:**
-  - X11 development files
-  - For MLX42: OpenGL, GLFW, etc.
-
-### Dependencies on Ubuntu/Debian
-```bash
-sudo apt-get install libx11-dev libxext-dev libxrandr-dev \
-  libxrender-dev libxinerama-dev libxcursor-dev libglfw3-dev libgl1-mesa-dev
-```
-
-## 🚀 Installation
+On Ubuntu or Debian, the required system packages can be installed with:
 
 ```bash
-# Clone the repository
-cd /home/carol/42cursus/04/Cub3D
+sudo apt update
+sudo apt install build-essential cmake libglfw3-dev libgl1-mesa-dev \
+    libx11-dev libxrandr-dev libxi-dev libxcursor-dev libxinerama-dev
+```
 
-# Build the project
+### Clone and compile
+
+```bash
+git clone https://github.com/carolinecbahia/cub3D.git
+cd cub3D
+git switch develop
 make
-
-# Run
-./cub3D maps/map.cub
 ```
 
-## 💻 Usage
+The build creates the `cub3D` executable. MLX42 and the local `libft` are compiled automatically by the Makefile.
 
-### Syntax
+### Run
+
+The program receives exactly one `.cub` scene file:
+
 ```bash
-./cub3D <map.cub>
+./cub3D maps/valid/valid_basic.cub
 ```
 
-### Map Format
-`.cub` files contain:
-- Texture definitions (NORTH, SOUTH, EAST, WEST)
-- Floor/ceiling colors
-- 2D map (1 = wall, 0 = free space, N/S/E/W = player)
+Additional themed maps are available:
 
-Example:
+```bash
+./cub3D maps/valid/valid_arcane.cub
+./cub3D maps/valid/valid_crypt.cub
+./cub3D maps/valid/valid_hearts.cub
+./cub3D maps/valid/valid_infernal.cub
 ```
-NO ./textures/wall_north.xpm
-SO ./textures/wall_south.xpm
-WE ./textures/wall_west.xpm
-EA ./textures/wall_east.xpm
-F 220,100,0
-C 225,30,0
-111111
-100001
-1000N1
-111111
+
+The Makefile also provides a configurable run target:
+
+```bash
+make run
+make run MAP=maps/valid/valid_crypt.cub
 ```
 
 ### Controls
 
 | Key | Action |
-|-----|--------|
-| **W** | Move forward |
-| **S** | Move backward |
-| **A** | Move left |
-| **D** | Move right |
-| **←/→** | Rotate camera |
-| **ESC** | Exit |
-| **X** (window) | Exit |
+| --- | --- |
+| `W` | Move forward |
+| `S` | Move backward |
+| `A` | Strafe left |
+| `D` | Strafe right |
+| `Left Arrow` | Rotate left |
+| `Right Arrow` | Rotate right |
+| `ESC` | Close the program |
 
-## 🏗️ Project Structure
+The window close button also exits the program.
 
+### Standard Makefile rules
+
+```bash
+make          # Build the mandatory executable
+make clean    # Remove object files
+make fclean   # Remove object files and executables
+make re       # Rebuild the project
 ```
-Cub3D/
+
+### Development and test rules
+
+```bash
+make help                         # List available rules
+make maps_test                    # Run the invalid-map test suite
+make norm                         # Run Norminette on src/ and inc/
+make debug                        # Build with debug information
+make gdb MAP=maps/valid/valid_basic.cub
+make valgrind MAP=maps/valid/valid_basic.cub
+```
+
+The invalid-map suite is kept under `maps/invalid/`. It covers invalid extensions, RGB values, multiple players, duplicate or missing textures, invalid characters, empty lines inside the map, open walls, and leaks into padded spaces.
+
+## Scene format
+
+A `.cub` file contains four wall texture paths, floor and ceiling colors, and the map. Configuration elements may appear in any order before the map, while the map must remain the final block.
+
+```text
+NO ./textures/wall.png
+SO ./textures/wall.png
+WE ./textures/wall.png
+EA ./textures/wall.png
+
+F 220,100,0
+C 225,30,0
+
+11111111
+10000001
+100N0001
+10000001
+11111111
+```
+
+### Identifiers
+
+| Identifier | Meaning |
+| --- | --- |
+| `NO` | North-facing wall texture |
+| `SO` | South-facing wall texture |
+| `WE` | West-facing wall texture |
+| `EA` | East-facing wall texture |
+| `F` | Floor color as `R,G,B` |
+| `C` | Ceiling color as `R,G,B` |
+
+The map accepts the following characters:
+
+| Character | Meaning |
+| --- | --- |
+| `1` | Wall |
+| `0` | Walkable space |
+| `N`, `S`, `E`, `W` | Player spawn and initial orientation |
+| space | Empty area outside the playable map |
+
+The map may be non-rectangular, but every walkable region must be completely enclosed by walls. Exactly one player spawn is required.
+
+## How it works
+
+For every screen column, the engine:
+
+1. calculates a ray direction from the player direction and camera plane;
+2. advances through the grid using the Digital Differential Analyzer algorithm;
+3. identifies the wall side and hit position;
+4. calculates the perpendicular wall distance to avoid fisheye distortion;
+5. selects the directional texture and samples the corresponding column;
+6. draws the ceiling, textured wall, and floor.
+
+Player movement is calculated with direction and camera-plane vectors. Before applying a new position, collision checks sample the surrounding area so the player cannot cross walls.
+
+## Project structure
+
+```text
+.
+├── inc/                 Public headers and data structures
+├── libft/               Local utility library
+├── maps/
+│   ├── valid/           Valid scenes and themed maps
+│   └── invalid/         Parser and validation test cases
+├── MLX42/               Graphics library
+├── roadmap/             Sprint and integration documentation
 ├── src/
-│   ├── main.c                # Main entry point
-│   ├── parsing/              # Map parsing and validation
-│   ├── raycasting/           # Raycasting algorithm
-│   ├── rendering/            # Rendering functions
-│   └── utils/                # Utilities
-├── inc/
-│   ├── Cub3D.h               # Main header
-│   └── types.h               # Types and structs
-├── maps/                     # Example maps (.cub)
-├── textures/                 # XPM textures
-├── MLX42/                    # MiniLibX 42
-├── libft/                    # Custom C library
-├── Makefile                  # Build
-└── README.md
+│   ├── game/            Initialization and resource destruction
+│   ├── hooks/           Input, movement, rotation, and collision
+│   ├── parsing/         Scene parsing and map validation
+│   ├── raycasting/      Ray setup, DDA, distance, and texture selection
+│   ├── rendering/       Frame, background, columns, and texture sampling
+│   └── utils/           Errors, cleanup, and shared helpers
+├── textures/            Wall texture assets
+└── Makefile
 ```
 
-## 🎨 Graphics & Rendering
+## Resources
 
-- Raycasting to simulate 3D from a 2D map
-- Wall texturing
-- Efficient rendering (60 FPS)
-- Minimap (optional)
+The following resources were used to study the concepts and APIs behind the project:
 
-## 🧪 Testing
+- [Lode's Computer Graphics Tutorial — Raycasting](https://lodev.org/cgtutor/raycasting.html) — ray directions, camera plane, DDA, perpendicular distance, and wall projection.
+- [Lode's Computer Graphics Tutorial — Textured Raycasting](https://lodev.org/cgtutor/raycasting.html#Textured_Raycaster) — wall hit coordinates and texture sampling.
+- [MLX42 documentation](https://github.com/codam-coding-college/MLX42) — window creation, images, textures, input hooks, and cleanup.
+- [42 Norm](https://github.com/42School/norminette) — source formatting and project conventions.
+- [Valgrind documentation](https://valgrind.org/docs/manual/manual.html) — memory, invalid-access, and file-descriptor diagnostics.
+- [CMake documentation](https://cmake.org/documentation/) — MLX42 build configuration.
 
-### Test Cases
-```bash
-# Valid map
-./cub3D maps/map.cub
+### Use of artificial intelligence
 
-# Invalid maps (should show error)
-./cub3D maps/no_wall.cub
-./cub3D maps/no_player.cub
-./cub3D maps/invalid_colors.cub
-```
+AI tools were used as development support for:
 
-### Validation Checklist
-- ✅ Rectangular map
-- ✅ Surrounded by walls
-- ✅ Only one player
-- ✅ Valid textures and colors
-- ✅ Valid path
+- brainstorming test cases and edge cases for `.cub` parsing;
+- reviewing integration plans and debugging hypotheses;
+- suggesting refactoring approaches for ray-casting, texture, and cleanup modules;
+- generating initial drafts of project documentation and checklists;
+- creating original visual texture concepts used as project assets.
 
-## 🔧 Build Commands
+AI output was not accepted blindly. Suggestions were reviewed, tested, corrected, and adapted by the authors. The authors are responsible for the final implementation and must be able to explain and modify every part of the submitted project.
 
-```bash
-make              # Compile (creates ./cub3D)
-make clean        # Remove object files
-make fclean       # Remove binaries
-make re           # Rebuild
-```
+## Authors
 
-## 🎓 Technical Highlights
+- Caroline Bahia — `ccavalca`
+- Ana Clara Nunes Oliveira — `anunes-o`
 
-### 1. Raycasting
-- Algorithm for 3D rendering from a 2D grid
-- Distance, angle, and texture calculation per column
-
-### 2. Robust Parsing
-- Reading and validating .cub files
-- Error checking and clear messages
-
-### 3. Memory Management
-- No leaks (valgrind)
-- Resource freeing on exit
-
-### 4. Modular Organization
-- Clear separation: parsing, rendering, logic
-- Small, well-defined functions
-
-## 🐛 Common Issues & Solutions
-
-| Issue | Solution |
-|-------|----------|
-| "Cannot connect to display" | Check X11 and DISPLAY variable |
-| Texture not loading | Invalid file/texture path |
-| Movement stuck | Check collision and map parsing |
-| Memory leak | Use valgrind to identify |
-
-## 📄 License
-
-Academic project 42. Free for educational use.
-
-## ✍️ Author
-
-**Caroline Bahia e Ana Clara Nunes**
-- 42SP: *anunes-o; ccavalca*
-- GitHub: *carolinecbahia*
-
----
-
-**⭐ Cub3D Project - 42SP**
-**Evaluation date:** [Fill in]
-**Repository:** [Link]
-**Status:** Mandatory and bonus implementation (if applicable)
+This repository was developed for the 42 São Paulo Common Core.
