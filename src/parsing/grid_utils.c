@@ -6,17 +6,16 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/17 17:43:34 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 13:25:08 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/25 13:41:42 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "cub3D.h"
 
 int	is_player(char c)
 {
-	return (c == PLAYER_E || c == PLAYER_N 
-		|| c == PLAYER_S || c == PLAYER_W );
+	return (c == PLAYER_E || c == PLAYER_N
+		|| c == PLAYER_S || c == PLAYER_W);
 }
 
 int	validate_map_char(char c)

@@ -6,12 +6,11 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/19 16:17:49 by anunes-o          #+#    #+#             */
-/*   Updated: 2026/08/19 16:18:28 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/25 13:41:13 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
 
 static t_vectors	next_point(t_vectors point, int direction)
 {

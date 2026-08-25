@@ -55,9 +55,6 @@ MAKEFLAGS	+= --no-print-directory
 CORE_SRC = \
 	src/utils/cleanup.c \
 	src/utils/errors.c \
-	src/utils/math_utils.c \
-	src/utils/strings.c \
-	src/utils/debug.c \
 	src/game/destroy_game.c \
 	src/game/init_player.c \
 	src/hooks/close_hook.c

@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:30:15 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/21 01:57:23 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/25 13:57:30 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	is_valid_number(char *str)
 	if (!str || !str[0])
 		return (0);
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		if (!ft_isdigit(str[i]))
 			return (0);
@@ -27,12 +27,13 @@ int	is_valid_number(char *str)
 	}
 	return (1);
 }
+
 int	validate_file(char *filename)
 {
 	int		fd;
 
 	if (!check_file_extension(filename, ".cub"))
-		return (return_error("╰┈➤ Wrong texture extension!\n", 0));
+		return (return_error("╰┈➤ Wrong file extension!\n", 0));
 	fd = open_file(filename);
 	if (fd == -1)
 		return (0);

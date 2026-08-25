@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/21 01:57:54 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/25 14:20:51 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,13 @@ int			read_map_size(char **file_lines, int start, t_map *map);
 int			find_map_start(char **file_lines);
 int			fill_map_grid(char **file_lines, int start, t_map *map);
 int			is_player(char c);
-int			parse_file(char *filename, t_map *map);
 void		cleanup_map(t_map *map, char **file_lines);
-int			parse_textures(char **file_lines, t_map *map);
-int			parse_colors(char **file_lines, t_map *map);
-int			parse_map(char **file_lines, t_map *map);
 int			validate_file(char *filename);
 int			validate_map_content(t_map *map);
 int			free_visited(int **visited, int height, int result);
 int			flood_fill_iterative(t_map *map, int **visited, int y, int x);
 int			flood_fill(t_map *map, int start_y, int start_x);
+int			parse_file(char *filename, t_map *map);
 
 /* Inits */
 t_map		init_map(char *filename);

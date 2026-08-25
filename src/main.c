@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:10:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 13:36:21 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/25 13:16:17 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ static int	init_game_data(t_game *game, char *filename)
 	if (!game->map.map_path)
 		return (FAILURE);
 	if (parse_file(filename, &game->map) == FAILURE)
+	{
+		cleanup_map(&game->map, NULL);
 		return (FAILURE);
+	}
 	if (init_player(game) == FAILURE)
 	{
 		cleanup_map(&game->map, NULL);

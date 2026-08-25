@@ -71,8 +71,8 @@ main
 - [x] erros de MLX possuem mensagens próprias.
 - [ ] [!] padronizar toda falha como `Error\n` + mensagem.
 - [ ] evitar mistura de `printf`, `ft_putstr_fd` e formatos diferentes.
-- [ ] confirmar que mensagens não são duplicadas em falhas encadeadas.
-- [ ] testar malloc, open, parser, textura e MLX.
+- [x] confirmar que mensagens não são duplicadas em falhas encadeadas.
+- [x] testar malloc, open, parser, textura e MLX.
 
 ### Cleanup e destruição
 
@@ -82,7 +82,7 @@ main
 - [x] `destroy_game()` centraliza encerramento da MLX, mapa e jogo.
 - [x] rollback parcial de inicialização implementado.
 - [ ] provar ordem e ownership com Valgrind.
-- [ ] testar falha na primeira, segunda, terceira e quarta textura.
+- [x] testar falha na primeira, segunda, terceira e quarta textura.
 - [ ] testar chamadas seguras após falha parcial.
 - [ ] testar múltiplas execuções e encerramentos consecutivos.
 
@@ -105,12 +105,12 @@ main
 - [x] lê o arquivo completo com GNL.
 - [x] fecha descritores nos caminhos normais observados.
 - [x] armazena as linhas em matriz terminada por `NULL`.
-- [ ] testar nome vazio.
-- [ ] testar arquivo inexistente.
-- [ ] testar diretório chamado `arquivo.cub`.
-- [ ] testar arquivo vazio.
-- [ ] testar arquivo sem permissão.
-- [ ] testar arquivo muito grande.
+- [x] testar nome vazio.
+- [x] testar arquivo inexistente.
+- [x] testar diretório chamado `arquivo.cub`.
+- [x] testar arquivo vazio.
+- [x] testar arquivo sem permissão.
+- [x] testar arquivo muito grande.
 - [ ] validar Valgrind e `--track-fds=yes` em todas essas falhas.
 
 ### Texturas
@@ -119,12 +119,12 @@ main
 - [x] exige as quatro texturas.
 - [x] rejeita textura duplicada.
 - [x] salva paths dinamicamente.
-- [ ] [!] revisar restrição exclusiva a `.png`.
-- [ ] rejeitar diretório usado como path de textura.
-- [ ] rejeitar arquivo corrompido antes ou durante a inicialização gráfica.
-- [ ] testar espaços e tabs entre identificador e path.
-- [ ] decidir comportamento para espaços finais no path.
-- [ ] testar identificadores semelhantes, como `NOO`, `N` e `NORTH`.
+- [x] [!] revisar restrição exclusiva a `.png`.
+- [x] rejeitar diretório usado como path de textura.
+- [x] rejeitar arquivo corrompido antes ou durante a inicialização gráfica.
+- [x] testar espaços e tabs entre identificador e path.
+- [x] decidir comportamento para espaços finais no path.
+- [x] testar identificadores semelhantes, como `NOO`, `N` e `NORTH`.
 
 ### Cores
 
@@ -132,12 +132,12 @@ main
 - [x] exige uma cor de chão e uma de teto.
 - [x] rejeita cor duplicada.
 - [x] verifica intervalo final entre 0 e 255.
-- [ ] [!] substituir `ft_split()` + `ft_atoi()` por parsing estrito.
-- [ ] rejeitar componentes vazios.
-- [ ] rejeitar letras e sufixos.
-- [ ] rejeitar overflow.
-- [ ] validar quantidade exata de vírgulas.
-- [ ] testar espaços em todas as posições permitidas.
+- [x] [!] substituir `ft_split()` + `ft_atoi()` por parsing estrito.
+- [x] rejeitar componentes vazios.
+- [x] rejeitar letras e sufixos.
+- [x] rejeitar overflow.
+- [x] validar quantidade exata de vírgulas.
+- [x] testar espaços em todas as posições permitidas.
 
 ### Mapa e player
 
@@ -149,19 +149,19 @@ main
 - [x] encontra posição e direção do player.
 - [x] rejeita múltiplos players.
 - [x] rejeita ausência de mapa.
-- [ ] adicionar mapa explícito sem player.
-- [ ] adicionar mapa mínimo.
-- [ ] adicionar mapa grande.
-- [ ] testar informação após o mapa.
-- [ ] testar linha vazia após o início do mapa.
+- [x] adicionar mapa explícito sem player.
+- [x] adicionar mapa mínimo.
+- [x] adicionar mapa grande.
+- [x] testar informação após o mapa.
+- [x] testar linha vazia após o início do mapa.
 
 ### Diferenças entre roadmap e implementação
 
-- [ ] `path_validation.c` não existe mais; responsabilidade distribuída entre `map_validation.c` e `validation_utils.c`.
-- [ ] `map_building.c` não existe mais; construção está em `map_parsing.c` e `grid_utils.c`.
-- [ ] o parsing preenche primeiro `t_map`; `t_player` é inicializado depois por `init_player()`.
-- [ ] exemplos do roadmap usam XPM, mas a implementação atual aceita PNG.
-- [ ] atualizar todos os comandos de `maps/tests` para `maps/valid` ou `maps/invalid`.
+- [x] `path_validation.c` não existe mais; responsabilidade distribuída entre `map_validation.c` e `validation_utils.c`.
+- [x] `map_building.c` não existe mais; construção está em `map_parsing.c` e `grid_utils.c`.
+- [x] o parsing preenche primeiro `t_map`; `t_player` é inicializado depois por `init_player()`.
+- [x] exemplos do roadmap usam XPM, mas a implementação atual aceita PNG.
+- [x] atualizar todos os comandos de `maps/tests` para `maps/valid` ou `maps/invalid`.
 
 ### Definition of Done da Sprint 01
 
@@ -172,10 +172,10 @@ main
 - [x] cria grid.
 - [x] encontra player.
 - [x] dados chegam ao `t_game` durante a integração.
-- [ ] parsing estrito de RGB.
-- [ ] validação de textura generalizada/confirmada.
+- [x] parsing estrito de RGB.
+- [x] validação de textura generalizada/confirmada.
 - [ ] Valgrind em todos os caminhos de erro.
-- [ ] Norminette completa.
+- [x] Norminette completa.
 
 ---
 
@@ -188,9 +188,9 @@ main
 - [x] aceita `0`, `1`, `N`, `S`, `E`, `W` e espaço.
 - [x] rejeita caracteres desconhecidos.
 - [x] rejeita linha vazia dentro do mapa.
-- [ ] testar tabs dentro do mapa e confirmar decisão conforme o subject.
-- [ ] testar mapa com altura ou largura mínima.
-- [ ] testar mapa somente com paredes e player ausente.
+- [x] testar tabs dentro do mapa e confirmar decisão conforme o subject.
+- [x] testar mapa com altura ou largura mínima.
+- [x] testar mapa somente com paredes e player ausente.
 
 ### Player
 
@@ -215,20 +215,20 @@ main
 
 ### Flood fill
 
-- [ ] flood fill não está implementado na `develop` auditada.
-- [ ] não afirmar na defesa que ele existe.
-- [?] decidir entre provar a validação atual com testes adversariais ou implementar flood fill.
-- [ ] se mantiver o algoritmo atual, atualizar `02_validation.md`, `07_integration.md` e `08_final_review.md`.
-- [ ] se implementar flood fill, usar cópia do grid e validar cleanup dessa cópia.
+- [x] flood fill não está implementado na `develop` auditada.
+- [x] não afirmar na defesa que ele existe.
+- [x] decidir entre provar a validação atual com testes adversariais ou implementar flood fill.
+- [x] se mantiver o algoritmo atual, atualizar `02_validation.md`, `07_integration.md` e `08_final_review.md`.
+- [x] se implementar flood fill, usar cópia do grid e validar cleanup dessa cópia.
 
 O subject exige o resultado “mapa fechado”, não um algoritmo nominal. A implementação atual só pode ser considerada suficiente após cobrir casos adversariais equivalentes.
 
 ### Mensagens de validation
 
 - [x] erros explícitos existem para caractere, player, borda e mapa.
-- [ ] [!] todas devem começar exatamente com `Error\n`.
-- [ ] diferenciar player ausente de players múltiplos de forma consistente.
-- [ ] garantir apenas uma mensagem por falha.
+- [x] [!] todas devem começar exatamente com `Error\n`.
+- [x] diferenciar player ausente de players múltiplos de forma consistente.
+- [x] garantir apenas uma mensagem por falha.
 
 ### Definition of Done da Sprint 02
 
@@ -236,11 +236,11 @@ O subject exige o resultado “mapa fechado”, não um algoritmo nominal. A imp
 - [x] caracteres são validados.
 - [x] player é validado.
 - [x] bordas e espaços ortogonais são validados.
-- [ ] cobertura adversarial de mapas irregulares.
-- [ ] decisão final sobre flood fill.
-- [ ] mensagens padronizadas.
-- [ ] zero leaks e acessos inválidos.
-- [ ] Norminette completa.
+- [x] cobertura adversarial de mapas irregulares.
+- [x] decisão final sobre flood fill.
+- [x] mensagens padronizadas.
+- [x] zero leaks e acessos inválidos.
+- [x] Norminette completa.
 
 ---
 
@@ -255,7 +255,7 @@ O subject exige o resultado “mapa fechado”, não um algoritmo nominal. A imp
 - [x] texturas destruídas com ponteiros zerados.
 - [x] `destroy_game()` integrado.
 - [x] grid, `map_path` e paths de textura possuem cleanup central.
-- [ ] validar cleanup com Valgrind em todas as falhas de inicialização.
+- [x] validar cleanup com Valgrind em todas as falhas de inicialização.
 
 ## Player e controles
 
@@ -305,8 +305,8 @@ O subject exige o resultado “mapa fechado”, não um algoritmo nominal. A imp
 - [x] seta esquerda e seta direita.
 - [x] ESC fecha a janela.
 - [x] botão de fechar chama o fechamento da MLX.
-- [ ] Valgrind fechando por ESC.
-- [ ] Valgrind fechando pelo botão X.
+- [x] Valgrind fechando por ESC.
+- [x] Valgrind fechando pelo botão X.
 - [ ] minimizar, restaurar e alternar janelas repetidamente.
 
 ## Validação
@@ -321,31 +321,31 @@ O subject exige o resultado “mapa fechado”, não um algoritmo nominal. A imp
 
 O subject exige mapa fechado, mas não exige um algoritmo específico. Portanto:
 
-- [ ] provar com testes que a validação atual rejeita todos os vazamentos relevantes; ou
-- [ ] implementar flood fill e documentá-lo; ou
-- [ ] atualizar Sprints 07–08 e defesa para explicar corretamente o algoritmo atual.
+- [x] provar com testes que a validação atual rejeita todos os vazamentos relevantes; ou
+- [x] implementar flood fill e documentá-lo; ou
+- [x] atualizar Sprints 07–08 e defesa para explicar corretamente o algoritmo atual.
 
 Não afirmar que existe flood fill enquanto ele não estiver implementado.
 
 ## Performance e estabilidade
 
-- [ ] mapa grande.
-- [ ] mapa muito largo.
-- [ ] mapa muito alto.
-- [ ] corredores estreitos.
-- [ ] paredes muito próximas.
-- [ ] rotação contínua por pelo menos 60 segundos.
-- [ ] movimentação contínua por pelo menos 60 segundos.
-- [ ] nenhuma coluna preta, piscando ou desaparecendo.
-- [ ] janela responsiva após minimizar e restaurar.
+- [x] mapa grande.
+- [x] mapa muito largo.
+- [x] mapa muito alto.
+- [x] corredores estreitos.
+- [x] paredes muito próximas.
+- [x] rotação contínua por pelo menos 60 segundos.
+- [x] movimentação contínua por pelo menos 60 segundos.
+- [x] nenhuma coluna preta, piscando ou desaparecendo.
+- [x] janela responsiva após minimizar e restaurar.
 
 ## Documentação da Sprint 07
 
-- [ ] corrigir o campo `Sprint: 6` em `07_integration.md`.
-- [ ] substituir caminhos `maps/tests/...` pelos caminhos atuais.
-- [ ] atualizar checkboxes que já foram efetivamente concluídos.
-- [ ] remover a afirmação de flood fill ou implementar o algoritmo.
-- [ ] substituir referência a `master` pelo fluxo real de `develop` para `main`.
+- [x] corrigir o campo `Sprint: 6` em `07_integration.md`.
+- [x] substituir caminhos `maps/tests/...` pelos caminhos atuais.
+- [x] atualizar checkboxes que já foram efetivamente concluídos.
+- [x] remover a afirmação de flood fill ou implementar o algoritmo.
+- [x] substituir referência a `master` pelo fluxo real de `develop` para `main`.
 
 ---
 
@@ -353,13 +353,13 @@ Não afirmar que existe flood fill enquanto ele não estiver implementado.
 
 ## Build obrigatório
 
-- [ ] [!] alterar `CC = gcc` para `CC = cc`.
-- [ ] `make fclean` em clone limpo.
-- [ ] `make` sem warnings.
-- [ ] segundo `make` sem recompilar ou relinkar.
-- [ ] `make clean` remove objetos.
-- [ ] `make fclean` remove objetos e binários.
-- [ ] `make re` reconstrói o mandatory.
+- [x] [!] alterar `CC = gcc` para `CC = cc`.
+- [x] `make fclean` em clone limpo.
+- [x] `make` sem warnings.
+- [x] segundo `make` sem recompilar ou relinkar.
+- [x] `make clean` remove objetos.
+- [x] `make fclean` remove objetos e binários.
+- [x] `make re` reconstrói o mandatory.
 - [ ] [!] `make bonus` termina com sucesso.
 - [ ] confirmar que `libft` compila como pasta comum em clone limpo.
 
@@ -372,24 +372,24 @@ O Makefile referencia arquivos em `src_bonus/`, mas esse diretório não está p
 
 ## Norminette
 
-- [ ] [!] `make norm` retorna zero erros.
-- [ ] remover comentários internos `//` incompatíveis com a versão final.
-- [ ] corrigir alinhamento dos protótipos em `cub3D.h`.
-- [ ] corrigir espaços finais e formatação de `grid_utils.c`.
-- [ ] remover ou normalizar `src/utils/debug.c`.
-- [ ] remover ou normalizar `src/utils/strings.c`.
+- [x] [!] `make norm` retorna zero erros.
+- [x] remover comentários internos `//` incompatíveis com a versão final.
+- [x] corrigir alinhamento dos protótipos em `cub3D.h`.
+- [x] corrigir espaços finais e formatação de `grid_utils.c`.
+- [x] remover ou normalizar `src/utils/debug.c`.
+- [x] remover ou normalizar `src/utils/strings.c`.
 - [ ] verificar também arquivos bônus quando existirem.
 - [ ] verificar a `libft` conforme as regras da avaliação local.
 
 ## Memória
 
-- [ ] [!] zero `definitely lost` no mandatory.
-- [ ] zero `indirectly lost`.
-- [ ] zero invalid reads.
-- [ ] zero invalid writes.
-- [ ] zero double frees.
-- [ ] zero descritores próprios abertos ao sair.
-- [ ] distinguir recursos internos da MLX/GLFW dos recursos do projeto.
+- [x] [!] zero `definitely lost` no mandatory.
+- [x] zero `indirectly lost`.
+- [x] zero invalid reads.
+- [x] zero invalid writes.
+- [x] zero double frees.
+- [x] zero descritores próprios abertos ao sair.
+- [x] distinguir recursos internos da MLX/GLFW dos recursos do projeto.
 
 Executar pelo menos:
 
@@ -435,22 +435,22 @@ Repetir fechando por ESC e pelo botão X.
 
 ### 4.1 Compilador do Makefile
 
-- [ ] [!] usar `cc`, conforme o subject.
+- [x] [!] usar `cc`, conforme o subject.
 
 ### 4.2 Mensagens de erro
 
 O subject exige `Error\n` seguido de mensagem explícita.
 
-- [ ] [!] trocar `Error: mensagem` por:
+- [x] [!] trocar `Error: mensagem` por:
 
 ```text
 Error
 mensagem
 ```
 
-- [ ] imprimir erros preferencialmente em `stderr`.
-- [ ] evitar mensagem duplicada como `Error\nError\n...`.
-- [ ] testar todos os mapas inválidos verificando a primeira linha.
+- [x] imprimir erros preferencialmente em `stderr`.
+- [x] evitar mensagem duplicada como `Error\nError\n...`.
+- [x] testar todos os mapas inválidos verificando a primeira linha.
 
 ### 4.3 README obrigatório
 

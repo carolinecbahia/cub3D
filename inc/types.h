@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:00 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/19 14:04:46 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/25 13:21:46 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,14 @@ typedef struct s_map
 	int		player_y;
 	char	player_dir;
 }	t_map;
+
+typedef struct s_flood
+{
+	t_map		*map;
+	int			**visited;
+	t_vectors	*stack;
+	int			top;
+}	t_flood;
 
 typedef struct s_player
 {

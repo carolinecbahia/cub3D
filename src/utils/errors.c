@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   errors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 23:48:32 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/19 14:41:23 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/08/25 13:46:28 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	ft_err(char *msg)
 {
-	printf("Error: %s!\n", msg);
+	ft_putstr_fd("Error: ", STDERR_FILENO);
+	ft_putendl_fd(msg, STDERR_FILENO);
 }
 
 int	return_error(char *msg, int err)
 {
-	printf("Error: %s\n", msg);
+	ft_putstr_fd("Error: ", STDERR_FILENO);
+	ft_putendl_fd(msg, STDERR_FILENO);
 	return (err);
 }

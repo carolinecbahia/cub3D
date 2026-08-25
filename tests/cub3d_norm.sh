@@ -86,8 +86,8 @@ echo "  SUMMARY" | tee -a "$OUTPUT_FILE"
 echo "========================================" | tee -a "$OUTPUT_FILE"
 
 # Count errors
-ERROR_COUNT=$(grep -c "Error" "$OUTPUT_FILE" || echo "0")
-OK_COUNT=$(grep -c "OK!" "$OUTPUT_FILE" || echo "0")
+ERROR_COUNT=$(grep -c "Error" "$OUTPUT_FILE" || true)
+OK_COUNT=$(grep -c "OK!" "$OUTPUT_FILE" || true)
 
 echo "Files OK: $OK_COUNT" | tee -a "$OUTPUT_FILE"
 echo "Errors found: $ERROR_COUNT" | tee -a "$OUTPUT_FILE"

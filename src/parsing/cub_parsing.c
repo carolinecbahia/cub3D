@@ -6,13 +6,13 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/18 13:40:36 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 13:37:38 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/25 14:20:14 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	parse_textures(char **file_lines, t_map *map)
+static int	parse_textures(char **file_lines, t_map *map)
 {
 	int	i;
 
@@ -34,7 +34,7 @@ int	parse_textures(char **file_lines, t_map *map)
 	return (1);
 }
 
-int	parse_colors(char **file_lines, t_map *map)
+static int	parse_colors(char **file_lines, t_map *map)
 {
 	int	i;
 
@@ -53,7 +53,7 @@ int	parse_colors(char **file_lines, t_map *map)
 	return (1);
 }
 
-int	parse_map(char **file_lines, t_map *map)
+static int	parse_map(char **file_lines, t_map *map)
 {
 	int	start;
 
@@ -76,10 +76,10 @@ int	parse_file(char *filename, t_map *map)
 	char	**file_lines;
 
 	if (!validate_file(filename))
-		return (FAILURE); //usar FAILURE
+		return (FAILURE);
 	file_lines = read_lines(filename);
 	if (!file_lines)
-		return (FAILURE); //usar FAILURE
+		return (FAILURE);
 	if (!(parse_textures(file_lines, map)))
 	{
 		cleanup_map(map, file_lines);

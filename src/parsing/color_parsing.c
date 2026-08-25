@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:54:51 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 13:39:40 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/25 14:19:18 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*extract_rgb_values(char *line)
 	return (&line[i]);
 }
 
-int	validate_rgb_values(int r, int g, int b)
+static int	validate_rgb_values(int r, int g, int b)
 {
 	if (r < 0 || r > 255)
 		return (return_error("╰┈➤ Invalid red value! 🔴\n", 0));
@@ -46,7 +46,7 @@ int	validate_rgb_values(int r, int g, int b)
 	return (1);
 }
 
-int	save_color(int *slot, int r, int g, int b)
+static int	save_color(int *slot, int r, int g, int b)
 {
 	if (*slot == -1)
 	{

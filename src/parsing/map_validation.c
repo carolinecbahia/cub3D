@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:51:57 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/19 16:18:51 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/08/25 14:31:04 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	validate_map_content(t_map *map)
 		{
 			c = map->grid[i][j];
 			if (!validate_map_char(c))
-				return (return_error("Invalid map character! 🗺️\n", 0));
+				return (return_error("╰┈➤ Invalid map character! 🗺️\n", 0));
 			j++;
 		}
 		i++;
