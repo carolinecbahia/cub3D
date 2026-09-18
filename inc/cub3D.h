@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/09/18 15:43:53 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/09/18 16:06:22 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int			check_all_textures(t_map *map);
 int			find_colors(char *line, char type);
 int			parse_color_line(char *line, t_map *map);
 int			parse_rgb(char *rgb_str, int *r, int *g, int *b);
-int			is_valid_number(char *str);
+int			is_valid_rgb_comp(char *str);
 int			check_all_colors(t_map *map);
 int			count_lines(int fd);
 int			is_map_line(char *line);

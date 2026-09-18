@@ -6,24 +6,29 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/24 12:30:15 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/25 13:57:30 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/09/18 16:06:08 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-int	is_valid_number(char *str)
+int	is_valid_rgb_comp(char *str)
 {
-	int	i;
+	int	digit;
+	int	value;
 
 	if (!str || !str[0])
 		return (0);
-	i = 0;
-	while (str[i])
+	value = 0;
+	while (*str)
 	{
-		if (!ft_isdigit(str[i]))
+		if (!ft_isdigit(*str))
 			return (0);
-		i++;
+		digit = *str - '0';
+		if (value > (255 - digit) / 10)
+			return (0);
+		value = value * 10 + digit;
+		str++;
 	}
 	return (1);
 }
