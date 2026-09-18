@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 16:34:37 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 01:41:29 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/09/18 14:39:15 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static mlx_texture_t	*load_single_texture(char *path)
 	texture = mlx_load_png(path);
 	if (!texture)
 	{
-		ft_putstr_fd("Error\nFailed to load texture: ", 2);
+		ft_putstr_fd("\nErrorFailed to load texture: ", 2);
 		ft_putstr_fd(path, 2);
 		ft_putstr_fd("\n", 2);
 		return (NULL);

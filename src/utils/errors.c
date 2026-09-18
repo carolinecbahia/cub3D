@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/23 23:48:32 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/25 13:46:28 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/09/18 14:39:41 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_err(char *msg)
 
 int	return_error(char *msg, int err)
 {
-	ft_putstr_fd("Error: ", STDERR_FILENO);
+	ft_putstr_fd("Error:\n", STDERR_FILENO);
 	ft_putendl_fd(msg, STDERR_FILENO);
 	return (err);
 }
