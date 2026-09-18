@@ -24,9 +24,9 @@ void	render_background(t_game *game)
 		while (x < WIDTH)
 		{
 			if (y < (HEIGHT / 2))
-				put_pixel(game, x, y, game->map.ceiling_color);
+				put_pixel(game, x, y, game->map.ceiling_color.rgba);
 			else
-				put_pixel(game, x, y, game->map.floor_color);
+				put_pixel(game, x, y, game->map.floor_color.rgba);
 			x++;
 		}
 		y++;

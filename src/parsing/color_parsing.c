@@ -46,11 +46,12 @@ static int	validate_rgb_values(int r, int g, int b)
 	return (1);
 }
 
-static int	save_color(int *slot, int r, int g, int b)
+static int	save_color(t_color *slot, int r, int g, int b)
 {
-	if (*slot == -1)
+	if (!slot->present)
 	{
-		*slot = (r << 24) | (g << 16) | (b << 8) | 0xFF;
+		slot->rgba = (r << 24) | (g << 16) | (b << 8) | 0xFF;
+		slot->present = 1;
 		return (1);
 	}
 	return (return_error("╰┈➤ Duplicated color!\n", 0));

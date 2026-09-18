@@ -57,7 +57,7 @@ int	check_all_textures(t_map *map)
 
 int	check_all_colors(t_map *map)
 {
-	if (map->floor_color == -1 || map->ceiling_color == -1)
+	if (!map->floor_color.present || !map->ceiling_color.present)
 		return (return_error("╰┈➤ Missing color!\n", 0));
 	return (1);
 }

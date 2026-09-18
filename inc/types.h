@@ -6,7 +6,7 @@
 /*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:00 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/25 13:21:46 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/09/18 14:56:53 by anunes-o         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@ typedef struct s_vectors
 	int	y;
 }	t_vectors;
 
+typedef struct s_color
+{
+	int	rgba;
+	int	present;
+}	t_color;
+
 typedef struct s_map
 {
 	char	**grid;
@@ -30,8 +36,8 @@ typedef struct s_map
 	int		height;
 	char	*map_path;
 	char	*textures_path[4];
-	int		floor_color;
-	int		ceiling_color;
+	t_color	floor_color;
+	t_color	ceiling_color;
 	int		player_x;
 	int		player_y;
 	char	player_dir;
