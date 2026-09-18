@@ -1,7 +1,7 @@
-NO	./textures/wall.png
-SO	./textures/wall.png
-WE	./textures/wall.png
-EA	./textures/wall.png
+NO	./textures/walls/arcane/no.png
+SO	./textures/walls/arcane/so.png
+WE	./textures/walls/arcane/we.png
+EA	./textures/walls/arcane/ea.png
 
 F	0, 128, 255
 C	255, 128, 0
