@@ -3,30 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   load_textures.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 16:34:37 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/09/18 14:39:15 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/09/18 15:37:39 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-static mlx_texture_t	*load_single_texture(char *path)
+static void	print_texture_error(char *path)
 {
-	mlx_texture_t	*texture;
+	ft_putstr_fd("Error\nFailed to load texture: ", STDERR_FILENO);
+	ft_putstr_fd(path, STDERR_FILENO);
+	ft_putstr_fd("\n", STDERR_FILENO);
+}
 
-	if (!path)
-		return (NULL);
-	texture = mlx_load_png(path);
-	if (!texture)
+static int	load_png_texture(t_wall_texture *wall, char *path)
+{
+	wall->texture = mlx_load_png(path);
+	if (!wall->texture)
 	{
-		ft_putstr_fd("\nErrorFailed to load texture: ", 2);
-		ft_putstr_fd(path, 2);
-		ft_putstr_fd("\n", 2);
-		return (NULL);
+		print_texture_error(path);
+		return (FAILURE);
 	}
-	return (texture);
+	wall->xpm = NULL;
+	wall->type = TEXTURE_PNG;
+	return (SUCCESS);
+}
+
+static int	load_xpm_texture(t_wall_texture *wall, char *path)
+{
+	wall->xpm = mlx_load_xpm42(path);
+	if (!wall->xpm)
+	{
+		print_texture_error(path);
+		return (FAILURE);
+	}
+	wall->texture = &wall->xpm->texture;
+	wall->type = TEXTURE_XPM42;
+	return (SUCCESS);
+}
+
+static int	load_single_texture(t_wall_texture *wall, char *path)
+{
+	if (!wall || !path)
+		return (FAILURE);
+	wall->texture = NULL;
+	wall->xpm = NULL;
+	wall->type = TEXTURE_NONE;
+	if (check_file_extension(path, ".png"))
+		return (load_png_texture(wall, path));
+	if (check_file_extension(path, ".xpm42"))
+		return (load_xpm_texture(wall, path));
+	print_texture_error(path);
+	return (FAILURE);
 }
 
 int	load_all_textures(t_game *game)
@@ -38,12 +69,28 @@ int	load_all_textures(t_game *game)
 	i = 0;
 	while (i < 4)
 	{
-		game->textures[i] = load_single_texture(game->map.textures_path[i]);
-		if (!game->textures[i])
+		if (load_single_texture(&game->textures[i],
+				game->map.textures_path[i]) == FAILURE)
+		{
+			destroy_textures(game);
 			return (FAILURE);
+		}
 		i++;
 	}
 	return (SUCCESS);
+}
+
+static void	destroy_single_texture(t_wall_texture *wall)
+{
+	if (!wall)
+		return ;
+	if (wall->type == TEXTURE_XPM42 && wall->xpm)
+		mlx_delete_xpm42(wall->xpm);
+	else if (wall->type == TEXTURE_PNG && wall->texture)
+		mlx_delete_texture(wall->texture);
+	wall->texture = NULL;
+	wall->xpm = NULL;
+	wall->type = TEXTURE_NONE;
 }
 
 void	destroy_textures(t_game *game)
@@ -55,11 +102,7 @@ void	destroy_textures(t_game *game)
 	i = 0;
 	while (i < 4)
 	{
-		if (game->textures[i])
-		{
-			mlx_delete_texture(game->textures[i]);
-			game->textures[i] = NULL;
-		}
+		destroy_single_texture(&game->textures[i]);
 		i++;
 	}
 }

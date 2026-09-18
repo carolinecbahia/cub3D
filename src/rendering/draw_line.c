@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/02 03:26:34 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 01:29:31 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/09/18 15:38:53 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	init_column_texture(t_game *game, t_ray *ray,
 			column->texture_index);
 	if (column->texture_x == FAILURE)
 		return (FAILURE);
-	texture = game->textures[column->texture_index];
+	texture = game->textures[column->texture_index].texture;
 	if (!texture || texture->height == 0)
 		return (FAILURE);
 	column->step = (double)texture->height / column->line_height;
@@ -57,7 +57,7 @@ static void	draw_column_pixels(t_game *game, t_ray *ray,
 	uint32_t		color;
 	int				y;
 
-	texture = game->textures[column->texture_index];
+	texture = game->textures[column->texture_index].texture;
 	y = column->draw_start;
 	while (y <= column->draw_end)
 	{

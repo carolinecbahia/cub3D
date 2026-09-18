@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   types.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:00 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/09/18 14:56:53 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/09/18 15:35:02 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@ typedef struct s_color
 	int	rgba;
 	int	present;
 }	t_color;
+
+typedef enum e_texture_type
+{
+	TEXTURE_NONE,
+	TEXTURE_PNG,
+	TEXTURE_XPM42
+}	t_texture_type;
+
+typedef struct s_wall_texture
+{
+	mlx_texture_t		*texture;
+	xpm_t				*xpm;
+	t_texture_type		type;
+}	t_wall_texture;
 
 typedef struct s_map
 {
@@ -86,7 +100,7 @@ typedef struct s_game
 	mlx_t			*mlx_ptr;
 	t_map			map;
 	t_player		player;
-	mlx_texture_t	*textures[4];
+	t_wall_texture	textures[4];	
 	mlx_image_t		*screen;
 	int				running;
 }	t_game;

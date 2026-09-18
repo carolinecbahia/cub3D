@@ -6,7 +6,7 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/15 01:25:37 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/15 02:23:53 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/09/18 15:39:26 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	calculate_texture_x(t_game *game, t_ray *ray, int texture_index)
 
 	if (!game || !ray || texture_index < 0 || texture_index >= 4)
 		return (FAILURE);
-	texture = game->textures[texture_index];
+	texture = game->textures[texture_index].texture;
 	if (!texture || texture->width == 0)
 		return (FAILURE);
 	if (ray->side == 0)
