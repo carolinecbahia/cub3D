@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 13:23:32 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/25 12:47:12 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/09/18 15:43:04 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ void	cleanup_map(t_map *map, char **file_lines)
 	{
 		free(map->textures_path[i]);
 		map->textures_path[i] = NULL;
+		i++;
+	}
+}
+
+void	destroy_textures(t_game *game)
+{
+	int	i;
+
+	if (!game)
+		return ;
+	i = 0;
+	while (i < 4)
+	{
+		destroy_single_texture(&game->textures[i]);
 		i++;
 	}
 }

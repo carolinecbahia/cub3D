@@ -6,18 +6,11 @@
 /*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 16:34:37 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/09/18 15:37:39 by ccavalca         ###   ########.fr       */
+/*   Updated: 2026/09/18 15:43:21 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
-
-static void	print_texture_error(char *path)
-{
-	ft_putstr_fd("Error\nFailed to load texture: ", STDERR_FILENO);
-	ft_putstr_fd(path, STDERR_FILENO);
-	ft_putstr_fd("\n", STDERR_FILENO);
-}
 
 static int	load_png_texture(t_wall_texture *wall, char *path)
 {
@@ -80,7 +73,7 @@ int	load_all_textures(t_game *game)
 	return (SUCCESS);
 }
 
-static void	destroy_single_texture(t_wall_texture *wall)
+void	destroy_single_texture(t_wall_texture *wall)
 {
 	if (!wall)
 		return ;
@@ -91,18 +84,4 @@ static void	destroy_single_texture(t_wall_texture *wall)
 	wall->texture = NULL;
 	wall->xpm = NULL;
 	wall->type = TEXTURE_NONE;
-}
-
-void	destroy_textures(t_game *game)
-{
-	int	i;
-
-	if (!game)
-		return ;
-	i = 0;
-	while (i < 4)
-	{
-		destroy_single_texture(&game->textures[i]);
-		i++;
-	}
 }

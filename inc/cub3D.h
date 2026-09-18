@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anunes-o <anunes-o@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: ccavalca <ccavalca@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/21 12:15:29 by ccavalca          #+#    #+#             */
-/*   Updated: 2026/08/25 14:20:51 by anunes-o         ###   ########.fr       */
+/*   Updated: 2026/09/18 15:43:53 by ccavalca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,5 +138,7 @@ void		ft_err(char *msg);
 int			return_error(char *msg, int err);
 void		ft_free_matrix(char **matrix);
 void		destroy_game(t_game *game);
+void		print_texture_error(char *path);
+void		destroy_single_texture(t_wall_texture *wall);
 
 #endif
